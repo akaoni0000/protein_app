@@ -55,5 +55,10 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-# オリジナル
+# ここからオリジナル
+
+# デバッグ機能 binding.pryで止める
 gem "pry-byebug"
+
+# 環境変数設定 .envファイルを作成して記述する SECRET_KEY = "test" 呼び出し ENV["SECRET"]
+gem 'dotenv-rails'

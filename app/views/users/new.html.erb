@@ -1,0 +1,14 @@
+<h1>ユーザー登録</h1>
+<%= form_with(model: @user, local: true) do |f| %>
+    <label>顔画像</label>
+    <%= f.file_field :avatar_image, accept:"image/png, image/jpeg" %>
+    <label>名前</label>
+    <%= f.text_field :name %>
+    <label>メアド</label>
+    <%= f.email_field :email %>
+    <label>パスワード</label>
+    <%= f.password_field :password %>
+    <label>パスワード確認</label>
+    <%= f.password_field :password_confirmation %>
+    <%= f.submit "登録", class: "btn btn-success" %>
+<% end %>

@@ -62,3 +62,9 @@ gem "pry-byebug"
 
 # 環境変数設定 .envファイルを作成して記述する SECRET_KEY = "test" 呼び出し ENV["SECRET"]
 gem 'dotenv-rails'
+
+# 画像投稿
+gem 'carrierwave', '~> 2.0'
+
+# パスワード暗号化
+gem 'bcrypt',  '3.1.12' 

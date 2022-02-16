@@ -1,0 +1,10 @@
+<h1>ログイン画面</h1>
+<%= form_with(url: users_login_path, method: :post, local: true) do |f| %>
+    <label>メアド</label>
+    <%= f.email_field :email %>
+    <label>パスワード</label>
+    <%= f.password_field :password %>
+    <label>パスワード確認</label>
+    <%= f.password_field :password_confirmation %>
+    <%= f.submit "ログイン", class: "btn btn-success" %>
+<% end %>

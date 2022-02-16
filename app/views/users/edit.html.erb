@@ -1,0 +1,7 @@
+<h1>ユーザー情報編集</h1>
+<%= form_with(model: @current_user, local: true) do |f| %>
+    <%= f.file_field :avatar_image %>
+    <%= f.text_field :name %>
+    <%= f.email_field :email %>
+    <%= f.submit "登録", class: "btn btn-success" %>
+<% end %>

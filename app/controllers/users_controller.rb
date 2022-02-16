@@ -8,7 +8,7 @@ class UsersController < ApplicationController
             redirect_to root_path
         else
             flash[:notice] = "メールアドレスまたはパスワードが違います"
-            redirect_to user_login_path
+            redirect_to login_path
         end
     end
 
@@ -39,7 +39,22 @@ class UsersController < ApplicationController
     def edit
     end
 
-    def updated
+    def index
+        @follow_or_follower = params[:follow_or_follower]
+        if @follow_or_follower == "follow"
+            @users = @current_user.follow_user
+        else
+            @users = @current_user.follower_user
+        end
+    end
+
+    def update
+        @user = User.find(@current_user.id)
+        if @user.update(user_params)
+            flash[:notice] = "編集しました"
+            redirect_to user_path(1)
+        else
+        end
     end
 
 

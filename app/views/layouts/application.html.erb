@@ -39,7 +39,7 @@
                   <a class="nav-link" aria-current="page" href="#">お気に入り</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" aria-current="page" href="#">マイページ</a>
+                  <%= link_to "マイページ", user_path(1), class: "nav-link" %>
                 </li>
                 <li class="nav-item">
                   <%= link_to "ログアウト", users_logout_path, method: :post, class: "nav-link", tabindex: "-1" %> 

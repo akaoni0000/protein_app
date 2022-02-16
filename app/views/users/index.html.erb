@@ -1,0 +1,39 @@
+<div class="container">
+    
+    <div class="row">
+        <div class="col-lg-4">
+            <%= render "templetes/user_show" %>
+        </div>
+        <div class="col-lg-8">
+            <% if @follow_or_follower == "follow" %>
+                <h1>フォロー一覧</h1>
+            <% else %>
+                <h1>フォロワー一覧</h1>
+            <% end %>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">second</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @users.each do |user| %>
+                        <tr>
+                            <th scope="row">
+                                <% if user.avatar_image.present? %>
+                                    <%= image_tag user.avatar_image.url, alt: "画像が表示できません", size: "50x50" %>
+                                <% else %>
+                                    <%= image_tag "no_image.jpg", alt: "画像が表示できません", size: "50x50" %>
+                                <% end %>
+                            </th>
+                            <td><%= user.id %></td>
+                            <td><%= link_to "フォロー外す", relations_follow_path(user.id), class: "btn btn-danger", remote: true, method: :post %></td>
+                        </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

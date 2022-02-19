@@ -14,6 +14,21 @@ class User < ApplicationRecord
     has_many :follower_user, through: :follower, source: :active # 自分をフォローしている人
     has_many :comments
 
+    def createFollow(user_id)
+        Relation.create(follow_id: self.id, followed_id: user_id)
+    end
+
+    def destroyFollow(user_id)
+        Relation.find_by(follow_id: self.id, followed_id: user_id).destroy
+    end
+
+    def follow?(user_id)
+        return Relation.find_by(follow_id: self.id, followed_id: user_id).present?
+    end
+
+    def followed?(user_id)
+        return Relation.find_by(follow_id: user_id, followed_id: self.id).present?
+    end
 
 
 end

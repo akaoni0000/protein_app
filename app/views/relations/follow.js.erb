@@ -1,1 +1,5 @@
-console.log("はは");
+var userInfo = document.getElementById("userInfo");
+var td = document.getElementById("td<%=@num%>")
+
+userInfo.innerHTML = "<%= j(render "templetes/user_show", user: @current_user) %>";
+td.innerHTML = "<a class='btn btn-primary' data-remote='true' rel='nofollow' data-method='post' href='/relations/unfollow/<%=@user_id%>?num=<%=@num%>'>フォロー中</a>";

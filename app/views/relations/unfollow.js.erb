@@ -1,0 +1,5 @@
+var userInfo = document.getElementById("userInfo");
+var td = document.getElementById("td<%=@num%>")
+
+userInfo.innerHTML = "<%= j(render "templetes/user_show", user: @current_user) %>";
+td.innerHTML = "<a class='btn btn-info' data-remote='true' rel='nofollow' data-method='post' href='/relations/follow/<%=@user_id%>?num=<%=@num%>'>フォローする</a>";

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_16_094808) do
+ActiveRecord::Schema.define(version: 2022_02_19_034608) do
 
   create_table "comments", charset: "utf8mb4", force: :cascade do |t|
     t.text "comment"
@@ -29,7 +29,6 @@ ActiveRecord::Schema.define(version: 2022_02_16_094808) do
 
   create_table "proteins", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
-    t.string "protein_image"
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

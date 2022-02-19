@@ -1,0 +1,29 @@
+<thead>
+    <tr>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+    </tr>
+</thead>
+<tbody>
+    <% @num = 0 %>
+    <% users.each do |user| %>
+        <tr>
+            <th scope="row">
+                <% if user.avatar_image.present? %>
+                    <%= image_tag user.avatar_image.url, alt: "画像が表示できません", size: "50x50" %>
+                <% else %>
+                    <%= image_tag "no_image.jpg", alt: "画像が表示できません", size: "50x50" %>
+                <% end %>
+            </th>
+            <td><%= user.name %></td>
+            <td id="td<%=@num%>">
+                <% if @current_user.follow?(user.id) %>
+                    <%= link_to "フォロー中", relations_unfollow_path(user.id, follow_or_follower: @follow_or_follower), class: "btn btn-primary", remote: true, method: :post %>                        
+                <% else %>
+                    <%= link_to "フォローする", relations_follow_path(user.id, follow_or_follower: @follow_or_follower), class: "btn btn-info", remote: true, method: :post %>
+                <% end %>
+            </td>
+        </tr>
+    <% end %>
+</tbody>

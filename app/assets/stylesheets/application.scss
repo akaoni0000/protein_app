@@ -37,7 +37,7 @@
     }
 
     .navbar-nav {
-        padding-left: 140px;
+        padding-left: 10px;
     }
 
     .navbar {
@@ -46,4 +46,12 @@
 
     .navbar-dark .navbar-nav .nav-link {
         color: white
+    }
+
+    .nav-link {
+        font-size: 15px;
+    }
+
+    .inline {
+        display: inline-block;
     }

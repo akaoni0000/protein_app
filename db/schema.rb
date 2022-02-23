@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_19_034608) do
+ActiveRecord::Schema.define(version: 2022_02_23_155214) do
 
   create_table "comments", charset: "utf8mb4", force: :cascade do |t|
     t.text "comment"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2022_02_19_034608) do
     t.string "protein_images"
     t.integer "height"
     t.integer "protein_height"
+    t.integer "large_height"
   end
 
   create_table "relations", charset: "utf8mb4", force: :cascade do |t|

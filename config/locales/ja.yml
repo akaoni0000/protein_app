@@ -1,0 +1,18 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+      protein: プロテイン
+    attributes:
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード確認
+      protein:
+        name: プロテイン名
+        feature: 特徴
+        price: 値段
+        height: 1食分の重さ
+        protein_height: タンパク質の重さ
+        large_height: 内容量

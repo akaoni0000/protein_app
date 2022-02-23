@@ -1,14 +1,59 @@
-<h1>ユーザー登録</h1>
-<%= form_with(model: @user, local: true) do |f| %>
-    <label>顔画像</label>
-    <%= f.file_field :avatar_image, accept:"image/png, image/jpeg" %>
-    <label>名前</label>
-    <%= f.text_field :name %>
-    <label>メアド</label>
-    <%= f.email_field :email %>
-    <label>パスワード</label>
-    <%= f.password_field :password %>
-    <label>パスワード確認</label>
-    <%= f.password_field :password_confirmation %>
-    <%= f.submit "登録", class: "btn btn-success" %>
+<div class="form">
+    <%= form_with(model: @user, local: true) do |f| %>
+        <h1 class="h3 mb-3 fw-normal text-center">ユーザー登録</h1>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">名前</label>
+            <%= f.text_field :name, class: "form-control name_form", id: "exampleFormControlInput1" %>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput2" class="form-label">メールアドレス</label>
+            <%= f.email_field :email, class: "form-control email_form", id: "exampleFormControlInput2" %>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput3" class="form-label">パスワード</label>
+            <%= f.password_field :password, class: "form-control password_form", id: "exampleFormControlInput3" %>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput4" class="form-label">パスワード確認</label>
+            <%= f.password_field :password_confirmation, class: "form-control password_confirmation_form", id: "exampleFormControlInput4" %>
+        </div>
+        <%= f.submit "登録", class: "w-100 btn btn-lg btn-primary my-4" %>
+    <% end %>
+</div>
+
+<% if @user.errors.messages.present? %>
+    <script>
+        let inputs = document.querySelectorAll('.field_with_errors *');
+        inputs.forEach((input)=>{
+            input.classList.add("is-invalid");
+            if (input.classList.contains("name_form")) {
+                gon.name_error_messages.forEach((message)=>{
+                    let html = `<p class='invalid-feedback'>${message}</p>`
+                    input.insertAdjacentHTML('afterend', html);
+                });
+            }
+            else if(input.classList.contains("email_form")) {
+                gon.email_error_messages.forEach((message)=>{
+                    let html = `<p class='invalid-feedback'>${message}</p>`
+                    input.insertAdjacentHTML('afterend', html);
+                });
+            }
+            else if(input.classList.contains("password_form")) {
+                gon.password_error_messages.forEach((message)=>{
+                    let html = `<p class='invalid-feedback'>${message}</p>`
+                    input.insertAdjacentHTML('afterend', html);
+                });
+            }
+            else if(input.classList.contains("password_confirmation_form")) {
+                gon.password_confirmation_error_messages.forEach((message)=>{
+                    let html = `<p class='invalid-feedback'>${message}</p>`
+                    input.insertAdjacentHTML('afterend', html);
+                });
+            }
+        });
+    </script>
 <% end %>

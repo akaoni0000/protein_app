@@ -1,0 +1,11 @@
+<h1>プロテイン詳細</h1>
+<%= @protein.name %>
+<%= @protein.price %>円
+<%= @protein.height %>g
+<% for protein_image in @protein.protein_images do %>
+    <div class="card inline my-3" style="width: 15rem;">
+        <%= image_tag protein_image.url, class: "card-img-top", style: "height: 230px;" %>
+        <div class="card-body">
+        </div>
+    </div>
+<% end %>

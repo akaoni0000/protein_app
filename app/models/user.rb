@@ -14,6 +14,11 @@ class User < ApplicationRecord
     has_many :follower_user, through: :follower, source: :active # 自分をフォローしている人
     has_many :comments
 
+    # バリデーション
+    validates :name, uniqueness: true, length: { in: 1..10 }
+    validates :email, presence: true, uniqueness: true
+    validates :password, length: { in: 6..20 }, on: :create
+
     def createFollow(user_id)
         Relation.create(follow_id: self.id, followed_id: user_id)
     end

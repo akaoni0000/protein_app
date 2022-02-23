@@ -13,6 +13,7 @@ Rails.start()
 ActiveStorage.start()
 
 
+
 window.onload = function() {
     const camera = document.getElementById("camera");
     const imageBox = document.getElementById("imageBox");
@@ -38,10 +39,10 @@ window.onload = function() {
                 reader.onload = function(){
                         let dataUrl = reader.result;
                         let html = `
-                            <div class="card inline my-3" id="card${id}" style="width: 15rem;">
-                                <img src="${dataUrl}" class="card-img-top" style="height: 230px;">
+                            <div class="card inline my-3" id="card${id}" style="width: 11rem;">
+                                <img src="${dataUrl}" class="card-img-top" style="height: 150px;">
                                 <div class="card-body">
-                                    <p class="card-text" id="image${id}">削除</p>
+                                    <p class="card-text btn btn-danger" id="image${id}">削除</p>
                                 </div>
                             </div>
                     `

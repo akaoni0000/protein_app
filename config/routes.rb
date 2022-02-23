@@ -6,11 +6,12 @@ Rails.application.routes.draw do
 
   # usersコントローラー
   resources :users, except: [:destroy]
-  post "users/login" => "users#login"
+  post "/users/login" => "users#login"
   post "/users/logout" => "users#logout"
 
   # proteinsコントローラ
   resources :proteins
+  post "/proteins/image_destroy" => "proteins#image_destroy"
 
   # commentsコントローラー
   resources :comments, only: [:create, :destroy]

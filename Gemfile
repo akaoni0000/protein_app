@@ -68,3 +68,9 @@ gem 'carrierwave', '~> 2.0'
 
 # パスワード暗号化
 gem 'bcrypt',  '3.1.12' 
+
+# エラー文日本語化
+gem 'rails-i18n'
+
+# jsにデータを渡す
+gem 'gon'

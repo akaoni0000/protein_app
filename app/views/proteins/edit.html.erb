@@ -1,0 +1,33 @@
+<h1>プロテイン編集</h1>
+<%= form_with(model: @protein, local: true, id: "form") do |f| %>
+    <label>名前</label>
+    <%= f.text_field :name %>
+    <label>特徴</label>
+    <%= f.text_area :feature %>
+    <label>値段</label>
+    <%= f.number_field :price %>円
+    <label>タンパク質含有量</label>
+    <%= f.number_field :height %><span>gあたり</span><%= f.number_field :protein_height %>g
+    <div class="container my-5">
+        <h3>最大5枚までアップロードできます</h3>
+        <div class="text-center" id="imageBox">
+            <% for num in 0..@protein.protein_images.length-1 do %>
+                <div class="card inline my-3" id="card<%=num+1%>" style="width: 15rem;">
+                    <%= image_tag @protein.protein_images[num].url, class: "card-img-top", style:"height: 230px;" %>
+                    <div class="card-body">
+                        <%= link_to "削除", proteins_image_destroy_path(arry_num: num, protein_id: @protein.id), method: :post, class: "card-text btn btn-danger", remote: true, data: { confirm: "本当に削除してよろしいですか？" } %>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+        <div class="bg-secondary text-center py-2" id="camera" style="width: 100%; height: 100px;">
+            <i class="bi bi-camera-fill" style="font-size: 35px;"></i>
+            <p>クリックして画像をアップロード</p>
+        </div>    
+     </div>
+    <% for num in @protein.protein_images.length+1..5 do %>
+        <input accept="image/*" type="file" name="protein[protein_images][]" class="getImages inputImage" id=<%=num%>>  <!-- ここは本来は<%= f.file_field :avatars %>とかきたかったがこれをするとmultiplate: trueがないとはじからパラメータで弾かれる 今回はmultiplateはなしにしたいのでこのような形になった -->
+    <% end %>
+
+    <%= f.submit "登録", class: "btn btn-success" %>
+<% end %>

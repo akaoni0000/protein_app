@@ -30,10 +30,17 @@ class UsersController < ApplicationController
         @user = User.new(user_params)
         if @user.save
             redirect_to root_path
+        else
+            gon.name_error_messages = @user.errors.full_messages_for(:name)
+            gon.email_error_messages = @user.errors.full_messages_for(:email)
+            gon.password_error_messages = @user.errors.full_messages_for(:password)
+            gon.password_confirmation_error_messages = @user.errors.full_messages_for(:password_confirmation)
+            render "new"
         end
     end
 
     def show
+        @proteins = @current_user.proteins
     end
 
     def edit

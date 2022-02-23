@@ -1,10 +1,15 @@
-<h1>ログイン画面</h1>
-<%= form_with(url: users_login_path, method: :post, local: true) do |f| %>
-    <label>メアド</label>
-    <%= f.email_field :email %>
-    <label>パスワード</label>
-    <%= f.password_field :password %>
-    <label>パスワード確認</label>
-    <%= f.password_field :password_confirmation %>
-    <%= f.submit "ログイン", class: "btn btn-success" %>
-<% end %>
+<div class="form-signin form">
+    <%= form_with(url: users_login_path, method: :post, local: true) do |f| %>
+        <h1 class="h3 mb-3 fw-normal text-center">ログイン画面</h1>
+        
+        <div class="form-floating">
+            <%= f.email_field :email, class: "form-control", id: "floatingInput" %>
+            <label for="floatingInput">メールアドレス</label>
+        </div>
+        <div class="form-floating">
+            <%= f.password_field :password, class: "form-control", id: "floatingPassword" %>
+            <label for="floatingPassword">パスワード</label>
+        </div>
+        <%= f.submit "ログイン", class: "w-100 btn btn-lg btn-primary my-4" %>
+    <% end %>
+</div>

@@ -55,3 +55,33 @@
     .inline {
         display: inline-block;
     }
+
+    .form {
+        margin: 0 auto;
+        margin-top: 200px;
+        width: 60%;
+    }
+
+    .alert {
+        position: absolute;
+        top: 86px;
+        width: 100%;
+        z-index: 10;
+    }
+
+    .pointer {
+        cursor: pointer;
+    }
+
+    .display_none {
+        display: none;
+    }
+
+    .number-field {
+        width: 180px;
+        display: inline-block;
+    }
+
+    .field_with_errors {
+        display: inline;
+    }

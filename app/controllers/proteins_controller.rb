@@ -13,18 +13,15 @@ class ProteinsController < ApplicationController
             flash[:notice] = "新しいプロテインを投稿しました"
             redirect_to user_path(@current_user.id)
         else
-            gon.name_error_messages = @protein.errors.full_messages_for(:name)
-            gon.feature_error_messages = @protein.errors.full_messages_for(:feature)
-            gon.price_error_messages = @protein.errors.full_messages_for(:price)
-            gon.height_error_messages = @protein.errors.full_messages_for(:height)
-            gon.protein_height_error_messages = @protein.errors.full_messages_for(:protein_height)
-            gon.large_height_error_messages = @protein.errors.full_messages_for(:large_height)
+            set_error_messages
             render "new"
         end
     end
 
     def show
         @protein = Protein.find(params[:id])
+        @comment = Comment.new
+        @comments = @protein.comments
     end
 
     def edit
@@ -45,13 +42,14 @@ class ProteinsController < ApplicationController
         @protein.price = @new_protein.price
         @protein.height = @new_protein.height
         @protein.protein_height = @new_protein.protein_height
+        @protein.taste = @new_protein.taste
 
         if @protein.save
             flash[:notice] = "プロテイン情報を更新しました"
             redirect_to protein_path(params[:id])
         else 
-            flash[:notice] = "プロテイン情報の更新に失敗しました"
-            redirect_to edit_protein_path(params[:id])
+            set_error_messages
+            render "edit"
         end
     end
 
@@ -69,11 +67,20 @@ class ProteinsController < ApplicationController
         end
         @protein.protein_images.delete_at(params[:arry_num].to_i)
         @protein.save
-
         @form_id = params[:arry_num].to_i + 1
+    end
+
+    def set_error_messages
+        gon.name_error_messages = @protein.errors.full_messages_for(:name)
+        gon.feature_error_messages = @protein.errors.full_messages_for(:feature)
+        gon.price_error_messages = @protein.errors.full_messages_for(:price)
+        gon.height_error_messages = @protein.errors.full_messages_for(:height)
+        gon.protein_height_error_messages = @protein.errors.full_messages_for(:protein_height)
+        gon.large_height_error_messages = @protein.errors.full_messages_for(:large_height)
+        gon.taste_error_messages = @protein.errors.full_messages_for(:taste)
     end
     
     def protein_params
-        params.require(:protein).permit(:name, :feature, :price, :protein_height, :height, :large_height, protein_images:[])
+        params.require(:protein).permit(:name, :feature, :price, :taste, :protein_height, :height, :large_height, protein_images:[])
     end
 end

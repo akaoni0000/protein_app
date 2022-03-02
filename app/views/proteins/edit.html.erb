@@ -1,33 +1,76 @@
-<h1>プロテイン編集</h1>
-<%= form_with(model: @protein, local: true, id: "form") do |f| %>
-    <label>名前</label>
-    <%= f.text_field :name %>
-    <label>特徴</label>
-    <%= f.text_area :feature %>
-    <label>値段</label>
-    <%= f.number_field :price %>円
-    <label>タンパク質含有量</label>
-    <%= f.number_field :height %><span>gあたり</span><%= f.number_field :protein_height %>g
-    <div class="container my-5">
-        <h3>最大5枚までアップロードできます</h3>
-        <div class="text-center" id="imageBox">
-            <% for num in 0..@protein.protein_images.length-1 do %>
-                <div class="card inline my-3" id="card<%=num+1%>" style="width: 15rem;">
-                    <%= image_tag @protein.protein_images[num].url, class: "card-img-top", style:"height: 230px;" %>
-                    <div class="card-body">
-                        <%= link_to "削除", proteins_image_destroy_path(arry_num: num, protein_id: @protein.id), method: :post, class: "card-text btn btn-danger", remote: true, data: { confirm: "本当に削除してよろしいですか？" } %>
+<div class="form">
+    <h1 class="text-center">プロテイン情報を編集</h1>
+    <%= form_with(model: @protein, local: true, id: "form") do |f| %>
+        <div class="my-5">
+            <h4>◆プロテイン画像</h4>
+            <P>最大5枚までアップロードできます</P>
+            <div class="text-center" id="imageBox">
+                <% for num in 0..@protein.protein_images.length-1 do %>
+                    <div class="card inline my-3" id="card<%=num+1%>" style="width: 11rem;">
+                        <%= image_tag @protein.protein_images[num].url, class: "card-img-top", style:"height: 150px;" %>
+                        <div class="card-body">
+                            <%= link_to "削除", proteins_image_destroy_path(arry_num: num, protein_id: @protein.id), method: :post, class: "card-text btn btn-danger", remote: true, data: { confirm: "本当に削除してよろしいですか？" } %>
+                        </div>
                     </div>
-                </div>
-            <% end %>
+                <% end %>
+            </div>
+            <div class="bg-secondary text-center py-2 pointer" id="camera" style="width: 100%; height: 100px;">
+                <i class="bi bi-camera-fill" style="font-size: 35px;"></i>
+                <p style="font-size: 13px;">クリックして画像をアップロード</p>
+            </div>
         </div>
-        <div class="bg-secondary text-center py-2" id="camera" style="width: 100%; height: 100px;">
-            <i class="bi bi-camera-fill" style="font-size: 35px;"></i>
-            <p>クリックして画像をアップロード</p>
-        </div>    
-     </div>
-    <% for num in @protein.protein_images.length+1..5 do %>
-        <input accept="image/*" type="file" name="protein[protein_images][]" class="getImages inputImage" id=<%=num%>>  <!-- ここは本来は<%= f.file_field :avatars %>とかきたかったがこれをするとmultiplate: trueがないとはじからパラメータで弾かれる 今回はmultiplateはなしにしたいのでこのような形になった -->
-    <% end %>
 
-    <%= f.submit "登録", class: "btn btn-success" %>
+        <% for num in @protein.protein_images.length+1..5 do %>
+            <input accept="image/*" type="file" name="protein[protein_images][]" class="getImages inputImage display_none" id=<%=num%>>  <!-- ここは本来は<%= f.file_field :avatars %>とかきたかったがこれをするとmultiplate: trueがないとはじからパラメータで弾かれる 今回はmultiplateはなしにしたいのでこのような形になった -->
+        <% end %>
+        
+        <div class="my-5">
+            <h4>◆プロテイン名</h4>
+            <%= f.text_field :name, class: "form-control name_form" %>
+        </div>
+
+        <div class="my-5">
+            <h4>◆味</h4>
+            <%= f.text_field :taste, class: "form-control taste_form" %>
+        </div>
+
+        <div class="my-5">
+            <h4>◆値段</h4>
+            <div>
+                <%= f.number_field :price, class: "form-control number-field price_form" %>円
+            </div>
+        </div>
+
+        <div class="my-5">
+            <h4>◆内容量</h4>
+            <div>
+                <%= f.number_field :large_height, class: "form-control number-field large_height_form" %>g
+            </div>
+        </div>
+
+        <div class="my-5">
+            <h4>◆タンパク質含有量</h4>
+            <div>
+                <%= f.number_field :height, class: "form-control number-field height_form", placeholder: "1食分の量" %>g<span class="mx-5">当たり</span><%= f.number_field :protein_height, class: "form-control number-field protein_height_form", placeholder: "タンパク質の量" %>g
+                <p class='invalid-feedback'>${message}</p>
+            </div>
+        </div>
+
+        <div class="my-5">
+            <h4>◆特徴</h4>
+            <%= f.text_area :feature, class: "form-control feature_form", style: "height: 200px;", id: "exampleFormControlInput2", placeholder: "おすすめの飲み方などを入力してください" %>
+        </div>
+
+        <div class="text-center my-5">
+            <%= f.submit "登録", class: "btn btn-danger w-100", style: "height: 60px;" %>
+        </div>
+    <% end %>
+</div>
+
+
+<!-- js -->
+<% if @protein.errors.messages.present? %>
+    <%= javascript_pack_tag 'protein_error.js', 'data-turbolinks-track': 'reload' %>
 <% end %>
+
+<%= javascript_pack_tag 'image.js', 'data-turbolinks-track': 'reload' %>

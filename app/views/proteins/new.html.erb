@@ -18,7 +18,12 @@
 
         <div class="my-5">
             <h4>◆プロテイン名</h4>
-            <%= f.text_field :name, class: "form-control name_form", id: "exampleFormControlInput1" %>
+            <%= f.text_field :name, class: "form-control name_form" %>
+        </div>
+
+        <div class="my-5">
+            <h4>◆味</h4>
+            <%= f.text_field :taste, class: "form-control taste_form" %>
         </div>
 
         <div class="my-5">
@@ -38,7 +43,7 @@
         <div class="my-5">
             <h4>◆タンパク質含有量</h4>
             <div>
-                <%= f.number_field :height, class: "form-control number-field height_form", placeholder: "1食分の量" %>g<span class="mx-2">当たり</span><%= f.number_field :protein_height, class: "form-control number-field protein_height_form", placeholder: "タンパク質の量" %>g
+                <%= f.number_field :height, class: "form-control number-field height_form", placeholder: "1食分の量" %>g<span class="mx-5">当たり</span><%= f.number_field :protein_height, class: "form-control number-field protein_height_form", placeholder: "タンパク質の量" %>g
                 <p class='invalid-feedback'>${message}</p>
             </div>
         </div>
@@ -56,46 +61,7 @@
 
 
 <% if @protein.errors.messages.present? %>
-    <script>
-        let inputs = document.querySelectorAll('.field_with_errors *');
-        inputs.forEach((input)=>{
-            input.classList.add("is-invalid");
-            if (input.classList.contains("name_form")) {
-                gon.name_error_messages.forEach((message)=>{
-                    let html = `<p class='invalid-feedback'>${message}</p>`
-                    input.insertAdjacentHTML('afterend', html);
-                });
-            }
-            else if(input.classList.contains("feature_form")) {
-                gon.feature_error_messages.forEach((message)=>{
-                    let html = `<p class='invalid-feedback'>${message}</p>`
-                    input.insertAdjacentHTML('afterend', html);
-                });
-            }
-            else if(input.classList.contains("price_form")) {
-                gon.price_error_messages.forEach((message)=>{
-                    let html = `<p class='invalid-feedback'>${message}</p>`
-                    input.insertAdjacentHTML('afterend', html);
-                });
-            }
-            else if(input.classList.contains("height_form")) {
-                gon.height_error_messages.forEach((message)=>{
-                    let html = `<p class='invalid-feedback'>${message}</p>`
-                    input.insertAdjacentHTML('afterend', html);
-                });
-            }
-            else if(input.classList.contains("protein_height_form")) {
-                gon.protein_height_error_messages.forEach((message)=>{
-                    let html = `<p class='invalid-feedback'>${message}</p>`
-                    input.insertAdjacentHTML('afterend', html);
-                });
-            }
-            else if(input.classList.contains("large_height_form")) {
-                gon.large_height_error_messages.forEach((message)=>{
-                    let html = `<p class='invalid-feedback'>${message}</p>`
-                    input.insertAdjacentHTML('afterend', html);
-                });
-            }
-        });
-    </script>
+    <%= javascript_pack_tag 'protein_error.js', 'data-turbolinks-track': 'reload' %>
 <% end %>
+
+<%= javascript_pack_tag 'image.js', 'data-turbolinks-track': 'reload' %>

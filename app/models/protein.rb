@@ -6,8 +6,8 @@ class Protein < ApplicationRecord
 
     # データベース関連付け
     belongs_to :user
-    has_many :comments
-    has_many :favorites
+    has_many :comments, dependent: :destroy
+    has_many :favorites, dependent: :destroy
 
     # バリデーション
     validates :name, presence: true
@@ -16,13 +16,14 @@ class Protein < ApplicationRecord
     validates :height, presence: true
     validates :protein_height, presence: true
     validates :large_height, presence: true
+    validates :taste, presence: true
     # カスタムバリデーション
     validate :correct_height
     def correct_height
-        if height.present? && protein_height.present? && height < protein_height
-            errors.add(:height, "はタンパク質の重さより小さくなくてはいけません")
+        if height.present? && protein_height.present? && height <= protein_height
+            errors.add(:height, "はタンパク質の重さより大きくなくてはいけません")
         end
-        if large_height.present? && height.present? && large_height < height
+        if large_height.present? && height.present? && large_height <= height
             errors.add(:large_height, "は1食分の重さより大きくなくてはいけません")
         end
     end

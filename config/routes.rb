@@ -20,4 +20,5 @@ Rails.application.routes.draw do
   post "relations/follow/:id" => "relations#follow", as: "relations_follow"
   post "relations/unfollow/:id" => "relations#unfollow", as: "relations_unfollow"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
 end

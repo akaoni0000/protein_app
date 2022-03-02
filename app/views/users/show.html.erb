@@ -1,20 +1,20 @@
 <div class="container">
     <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-4 text-center my-5">
             <%= render "templetes/user_show", user: @current_user %>
         </div>
-        <div class="col-lg-8">
-            <h1>投稿したプロテイン</h1>
+        <div class="col-lg-8 text-center">
+            <h3 class="my-5">投稿したプロテイン</h3>
             <% @proteins.each do |protein| %>
-                <div class="card inline" style="width: 18rem;">
+                <div class="card inline m-3" style="width: 18rem;">
                     <% if protein.protein_images[0].present? %>
-                        <%= image_tag protein.protein_images[0].url, class: "card-img-top", style: "height: 230px;" %>
+                        <%= image_tag protein.protein_images[0].url, class: "card-img-top", size: "300x300" %>
                     <% else %>
-                        <%= image_tag "no_image2.jpg", class: "card-img-top", style: "height: 230px;" %>
+                        <%= image_tag "no_image2.jpg", class: "card-img-top", size: "300x300" %>
                     <% end %>
                     <div class="card-body">
                         <h5 class="card-title"><%= protein.name %></h5>
-                        <p class="card-text"><%= protein.feature %></p>
+                        <p class="card-text" style="height: 50px; text-align: left;"><%= protein.feature.slice(0, 50) %></p>
                         <%= link_to "詳細はこちら", protein_path(protein.id), class: "btn btn-primary" %>
                         <%= link_to "編集する", edit_protein_path(protein.id), class: "btn btn-info" %>
                     </div>

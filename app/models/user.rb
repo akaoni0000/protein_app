@@ -12,7 +12,7 @@ class User < ApplicationRecord
     has_many :follower, class_name: "Relation", foreign_key: "followed_id", dependent: :destroy
     has_many :follow_user, through: :follow, source: :passive # 自分がフォローしている人
     has_many :follower_user, through: :follower, source: :active # 自分をフォローしている人
-    has_many :comments
+    has_many :comments, dependent: :destroy
 
     # バリデーション
     validates :name, uniqueness: true, length: { in: 1..10 }

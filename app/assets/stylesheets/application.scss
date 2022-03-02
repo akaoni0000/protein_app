@@ -54,6 +54,7 @@
 
     .inline {
         display: inline-block;
+        vertical-align: top;
     }
 
     .form {
@@ -84,4 +85,16 @@
 
     .field_with_errors {
         display: inline;
+    }
+
+    .text-decoration-none {
+        text-decoration: none;
+    } 
+
+    .border1 {
+        outline: 2px solid blue;
+    }
+
+    .bold {
+        font-weight: bold;
     }

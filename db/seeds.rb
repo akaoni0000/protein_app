@@ -7,11 +7,11 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-User.create(name: "aaa", email: "aaa@gmail.com", password: "aaa", password_confirmation: "aaa") ### pasword_digestカラムでデータを入れると認証でエラーがおこる
-User.create(name: "bbb", email: "bbb@gmail.com", password: "aaa", password_confirmation: "aaa")
-User.create(name: "ccc", email: "ccc@gmail.com", password: "aaa", password_confirmation: "aaa")
-User.create(name: "ddd", email: "eee@gmail.com", password: "aaa", password_confirmation: "aaa")
-User.create(name: "eee", email: "ddd@gmail.com", password: "aaa", password_confirmation: "aaa")
+User.create(name: "aaa", email: "aaa@gmail.com", password: "aaaaaa", password_confirmation: "aaaaaa") ### pasword_digestカラムでデータを入れると認証でエラーがおこる
+User.create(name: "bbb", email: "bbb@gmail.com", password: "aaaaaa", password_confirmation: "aaaaaa")
+User.create(name: "ccc", email: "ccc@gmail.com", password: "aaaaaa", password_confirmation: "aaaaaa")
+User.create(name: "ddd", email: "eee@gmail.com", password: "aaaaaa", password_confirmation: "aaaaaa")
+User.create(name: "eee", email: "ddd@gmail.com", password: "aaaaaa", password_confirmation: "aaaaaa")
 
 Relation.create(follow_id: 1, followed_id: 2)
 Relation.create(follow_id: 1, followed_id: 3)

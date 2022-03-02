@@ -1,0 +1,20 @@
+var commentBox = document.getElementById("commentBox");
+var commentForm = document.getElementById("commentForm");
+var html = `
+    <div class="mt-4 text-center">
+        <div class="inline" style="height: 30px; width:50px;">
+            <% if @comment.user.avatar_image.present? %>
+                <%= image_tag @comment.user.avatar_image.url, class:"img-fluid circle inline", alt: "画像が表示できません", size: "50x50" %>
+            <% else %>
+                <%= image_tag "no_image.jpg", class:"img-fluid circle inline", alt: "画像が表示できません", size: "50x50" %>
+            <% end %>
+        </div>
+        <div class="inline" style="width: 80%; text-align: left;">
+            <p class="bold"><%=@comment.user.name%></p>
+            <p><%=@comment.comment%></p>
+        </div>
+    </div>
+`
+
+commentBox.insertAdjacentHTML('afterbegin', html);
+commentForm.value = "";

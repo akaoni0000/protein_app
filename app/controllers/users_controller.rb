@@ -31,10 +31,7 @@ class UsersController < ApplicationController
         if @user.save
             redirect_to root_path
         else
-            gon.name_error_messages = @user.errors.full_messages_for(:name)
-            gon.email_error_messages = @user.errors.full_messages_for(:email)
-            gon.password_error_messages = @user.errors.full_messages_for(:password)
-            gon.password_confirmation_error_messages = @user.errors.full_messages_for(:password_confirmation)
+            set_error_messages
             render "new"
         end
     end
@@ -44,6 +41,7 @@ class UsersController < ApplicationController
     end
 
     def edit
+        @user = @current_user
     end
 
     def index
@@ -62,6 +60,13 @@ class UsersController < ApplicationController
             redirect_to user_path(1)
         else
         end
+    end
+
+    def set_error_messages
+        gon.name_error_messages = @user.errors.full_messages_for(:name)
+        gon.email_error_messages = @user.errors.full_messages_for(:email)
+        gon.password_error_messages = @user.errors.full_messages_for(:password)
+        gon.password_confirmation_error_messages = @user.errors.full_messages_for(:password_confirmation)
     end
 
 

@@ -1,0 +1,18 @@
+<% @proteins.each do |protein| %>
+    <div class="card inline m-2" style="width: 18rem;">
+        <% if protein.protein_images[0].present? %>
+            <%= image_tag protein.protein_images[0].url, class: "card-img-top", size: "300x300" %>
+        <% else %>
+            <%= image_tag "no_image2.jpg", class: "card-img-top", size: "300x300" %>
+        <% end %>
+        <div class="card-body">
+            <h5 class="card-title text-center"><%= protein.name %></h5>
+            <% if protein.feature.length >40 %>
+                <p class="card-text" style="height: 50px; text-align: left;"><%= protein.feature.slice(0, 40) %>...</p>
+            <% else %>
+                <p class="card-text" style="height: 50px; text-align: left;"><%= protein.feature %></p>
+            <% end %>
+            <%= link_to "詳細", protein_path(protein.id), class: "btn btn-primary w-100" %>
+        </div>
+    </div>
+<% end %>

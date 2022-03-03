@@ -37,11 +37,12 @@ class UsersController < ApplicationController
     end
 
     def show
-        @proteins = @current_user.proteins
+        @user = User.find(params[:id])
+        @proteins = @current_user.proteins.page(params[:page]).per(2)
     end
 
     def edit
-        @user = @current_user
+        @user = @current_user #こうしないとエラー画面でfiele_with_errorsが作成されなかった
     end
 
     def index
@@ -57,9 +58,18 @@ class UsersController < ApplicationController
         @user = User.find(@current_user.id)
         if @user.update(user_params)
             flash[:notice] = "編集しました"
-            redirect_to user_path(1)
+            redirect_to user_path(@current_user.id)
         else
+            set_error_messages
+            render "edit"
         end
+    end
+
+    def destroy_image
+        @current_user.avatar_image = ""
+        @current_user.save
+        flash[:notice] = "編集しました"
+        redirect_to user_path(@current_user.id)
     end
 
     def set_error_messages

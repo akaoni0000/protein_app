@@ -74,3 +74,7 @@ gem 'rails-i18n'
 
 # jsにデータを渡す
 gem 'gon'
+
+# ページネーション
+gem 'kaminari'
+gem 'bootstrap5-kaminari-views', '~> 0.0.1'

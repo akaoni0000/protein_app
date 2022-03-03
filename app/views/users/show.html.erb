@@ -1,25 +1,42 @@
-<div class="container">
-    <div class="row">
-        <div class="col-lg-4 text-center my-5">
-            <%= render "templetes/user_show", user: @current_user %>
-        </div>
-        <div class="col-lg-8 text-center">
-            <h3 class="my-5">投稿したプロテイン</h3>
-            <% @proteins.each do |protein| %>
-                <div class="card inline m-3" style="width: 18rem;">
-                    <% if protein.protein_images[0].present? %>
-                        <%= image_tag protein.protein_images[0].url, class: "card-img-top", size: "300x300" %>
+<div class="container bg-danger" style="height: 250px; margin-top: 120px;">
+    <div class="row bg-dark" style="height: 250px;">
+
+        <!-- col-lg-4 -->
+        <div class="col-lg-4 bg-success text-center" style="height: 250px;">
+            <div class="btn-group mt-5">
+                <div type="button" class="dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                    <% if @user.avatar_image.present? %>
+                        <%= image_tag @user.avatar_image.url, class:"img-fluid circle", alt: "画像が表示できません", style: "width: 150px; height: 150px;" %>
                     <% else %>
-                        <%= image_tag "no_image2.jpg", class: "card-img-top", size: "300x300" %>
+                        <%= image_tag "no_image.jpg", class:"", alt: "画像が表示できません", size: "300x240" %>
                     <% end %>
-                    <div class="card-body">
-                        <h5 class="card-title"><%= protein.name %></h5>
-                        <p class="card-text" style="height: 50px; text-align: left;"><%= protein.feature.slice(0, 50) %></p>
-                        <%= link_to "詳細はこちら", protein_path(protein.id), class: "btn btn-primary" %>
-                        <%= link_to "編集する", edit_protein_path(protein.id), class: "btn btn-info" %>
-                    </div>
                 </div>
-            <% end %>
+                <ul class="dropdown-menu" style="">
+                    <li class="dropdown-item pointer" id="changeImg">画像を変更</li>
+                    <% if @user.avatar_image.present? %>
+                        <li><%= link_to "画像を削除", users_destroy_image_path, method: :post, class: "dropdown-item", data: { confirm: "本当に削除してよろしいですか？" } %></li>
+                    <% end %>
+                </ul>
+                <div>
+                    <%= form_with(model: @current_user, class: "display_none") do |f| %>
+                        <%= f.file_field :avatar_image, accept:"image/*", id: "userImgForm"%>
+                        <%= f.submit "登録", id: "submitBtn" %>
+                    <% end %>
+                </div>
+            </div>
         </div>
+        <!-- col-lg-4ここまで -->
+
+        <!-- col-lg-8 -->
+        <div class="col-lg-8 bg-info" style="height: 250px; padding-left: 40px;">
+            <div class="bg-danger text-center">
+                <h2 class="inline" style="font-weight: bold;"><%=@user.name%></h2><span class="btn btn-primary" style="margin-left: 150px;">フォローする</span>
+            </div>
+            <div class="bg-primary text-center">
+                <span style="margin-right: 20px;">投稿<%=@user.proteins.count%>件</span><span style="margin-right: 20px;">フォロワー<%=@user.follow.count%>人</span><span>フォロー中<%=@user.follow.count%>人</span>
+            </div>
+        </div>
+        <!-- col-lg-8ここまで -->
+
     </div>
 </div>

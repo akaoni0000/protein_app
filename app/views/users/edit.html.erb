@@ -2,8 +2,6 @@
     <%= form_with(model: @user, local: true) do |f| %>
         <h1 class="h3 mb-3 fw-normal text-center">ユーザー編集</h1>
 
-         <%= f.file_field :avatar_image %>
-
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">名前</label>
             <%= f.text_field :name, class: "form-control name_form", id: "exampleFormControlInput1" %>
@@ -14,11 +12,10 @@
             <%= f.email_field :email, class: "form-control email_form", id: "exampleFormControlInput2" %>
         </div>
 
-        <%= f.submit "登録", class: "w-100 btn btn-lg btn-primary my-4" %>
+        <%= f.submit "登録", class: "w-100 btn btn-lg btn-danger my-4" %>
     <% end %>
 </div>
 
 <% if @user.errors.messages.present? %>
     <%= javascript_pack_tag 'user_error.js', 'data-turbolinks-track': 'reload' %>
 <% end %>
-

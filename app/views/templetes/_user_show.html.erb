@@ -1,8 +1,26 @@
-<% if user.avatar_image.present? %>
-    <%= image_tag user.avatar_image.url, class:"img-fluid circle", alt: "画像が表示できません", size: "300x240" %>
-<% else %>
-    <%= image_tag "no_image.jpg", class:"", alt: "画像が表示できません", size: "300x240" %>
-<% end %>
+<div class="btn-group">
+    <div type="button" class="dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+        <% if user.avatar_image.present? %>
+            <%= image_tag user.avatar_image.url, class:"img-fluid circle", alt: "画像が表示できません", style: "width: 240px; height: 240px;" %>
+        <% else %>
+            <%= image_tag "no_image.jpg", class:"", alt: "画像が表示できません", size: "300x240" %>
+        <% end %>
+    </div>
+    <ul class="dropdown-menu" style="">
+        <li class="dropdown-item pointer" id="changeImg">画像を変更</li>
+        <% if user.avatar_image.present? %>
+            <li><%= link_to "画像を削除", users_destroy_image_path, method: :post, class: "dropdown-item", data: { confirm: "本当に削除してよろしいですか？" } %></li>
+        <% end %>
+    </ul>
+    <div>
+        <%= form_with(model: @current_user, class: "display_none") do |f| %>
+            <%= f.file_field :avatar_image, accept:"image/*", id: "userImgForm"%>
+            <%= f.submit "登録", id: "submitBtn" %>
+        <% end %>
+    </div>
+</div>
+    
+
 <p style="font-size: 26px;"><%= user.name %></p>
 <div class="mb-3">
     <span><%= user.follow.count %><%= link_to "フォロー", users_path(follow_or_follower: "follow"), class: "text-decoration-none" %></span>
@@ -11,3 +29,6 @@
 <p><%= link_to "編集", edit_user_path(1), class: "btn btn-primary", style: "width: 40%" %></p>
 <p><%= link_to "ログアウト", users_logout_path, method: :post, class: "btn btn-danger", style: "width: 40%;" %></p>
 
+
+
+<%= javascript_pack_tag 'userImg.js', 'data-turbolinks-track': 'reload' %>

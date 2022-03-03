@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :users, except: [:destroy]
   post "/users/login" => "users#login"
   post "/users/logout" => "users#logout"
+  post "/users/destroy_image" => "users#destroy_image"
 
   # proteinsコントローラ
   resources :proteins
@@ -15,6 +16,9 @@ Rails.application.routes.draw do
 
   # commentsコントローラー
   resources :comments, only: [:create, :destroy]
+
+  # favoritesコントローラー
+  resources :favorites, only: [:create, :destroy]
 
   # relationsコントローラー
   post "relations/follow/:id" => "relations#follow", as: "relations_follow"

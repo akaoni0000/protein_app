@@ -17,31 +17,31 @@
         <input accept="image/*" type="file" name="protein[protein_images][]" class="getImages inputImage display_none" id="5">
 
         <div class="my-5">
-            <h4>◆プロテイン名</h4>
+            <h4>◆プロテイン名<span class="label-danger">必須</span></h4>
             <%= f.text_field :name, class: "form-control name_form" %>
         </div>
 
         <div class="my-5">
-            <h4>◆味</h4>
+            <h4>◆味<span class="label-danger">必須</span></h4>
             <%= f.text_field :taste, class: "form-control taste_form" %>
         </div>
 
         <div class="my-5">
-            <h4>◆値段</h4>
+            <h4>◆値段<span class="label-danger">必須</span></h4>
             <div>
                 <%= f.number_field :price, class: "form-control number-field price_form" %>円
             </div>
         </div>
 
         <div class="my-5">
-            <h4>◆内容量</h4>
+            <h4>◆内容量<span class="label-danger">必須</span></h4>
             <div>
                 <%= f.number_field :large_height, class: "form-control number-field large_height_form" %>g
             </div>
         </div>
 
         <div class="my-5">
-            <h4>◆タンパク質含有量</h4>
+            <h4>◆タンパク質含有量<span class="label-danger">必須</span></h4>
             <div>
                 <%= f.number_field :height, class: "form-control number-field height_form", placeholder: "1食分の量" %>g<span class="mx-5">当たり</span><%= f.number_field :protein_height, class: "form-control number-field protein_height_form", placeholder: "タンパク質の量" %>g
                 <p class='invalid-feedback'>${message}</p>
@@ -49,7 +49,7 @@
         </div>
 
         <div class="my-5">
-            <h4>◆特徴</h4>
+            <h4>◆特徴<span class="label-danger">必須</span></h4>
             <%= f.text_area :feature, class: "form-control feature_form", style: "height: 200px;", id: "exampleFormControlInput2", placeholder: "おすすめの飲み方などを入力してください" %>
         </div>
 

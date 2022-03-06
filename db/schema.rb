@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_02_054501) do
+ActiveRecord::Schema.define(version: 2022_03_04_015709) do
 
   create_table "comments", charset: "utf8mb4", force: :cascade do |t|
     t.text "comment"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 2022_03_02_054501) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "password_digest"
+    t.text "introduction"
   end
 
 end

@@ -1,5 +1,23 @@
 var userInfo = document.getElementById("userInfo");
-var td = document.getElementById("td<%=@num%>")
+<% if @current_user == @user %>
+    userInfo.innerHTML = `
+        <span style="margin-right: 20px;">投稿<%=@current_user.proteins.count%>件</span>
+        <span class="pointer" style="margin-right: 20px;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">フォロワー<%=@current_user.follower.count%>人</span>
+        <span class="pointer" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">フォロー中<%=@current_user.follow.count%>人</span>
+    `;
+<% end %>
 
-userInfo.innerHTML = "<%= j(render "templetes/user_show", user: @current_user) %>";
-td.innerHTML = "<a class='btn btn-info' data-remote='true' rel='nofollow' data-method='post' href='/relations/follow/<%=@user_id%>?num=<%=@num%>'>フォローする</a>";
+if (document.getElementById("follower<%=@user_id%>") != null) { //フォロワー画面にいるかどうか
+    var td = document.getElementById("follow<%=@user_id%>")
+    td.innerHTML = '<%= link_to "フォローする", relations_follow_path(@user_id, page_user_id: @user.id), class: "btn btn-info", remote: true, method: :post %>';
+}
+
+if (document.getElementById("follow<%=@user_id%>") != null) { //フォロー画面にいるかどうか
+    var td = document.getElementById("follower<%=@user_id%>")
+    td.innerHTML = '<%= link_to "フォローする", relations_follow_path(@user_id, page_user_id: @user.id), class: "btn btn-info", remote: true, method: :post %>';
+} else {
+    <% if @current_user == @user %>
+        var follow_user = document.getElementById("follow_user");
+        follow_user.innerHTML = '<%= j(render "templetes/follow_follower", users: @current_user.follow_user, follow_or_follower: false) %> '
+    <% end %>
+}

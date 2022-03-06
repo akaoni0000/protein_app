@@ -38,7 +38,9 @@ class UsersController < ApplicationController
 
     def show
         @user = User.find(params[:id])
-        @proteins = @current_user.proteins.page(params[:page]).per(2)
+        @follow_users = @user.follow_user
+        @follower_users = @user.follower_user
+        @proteins = @current_user.proteins
     end
 
     def edit

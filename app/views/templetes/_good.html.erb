@@ -1,11 +1,11 @@
-<% if @protein.favorites.where(user_id: @current_user.id).present? %>
-    <%= link_to favorite_path(@current_user.id, protein_id: @protein.id), remote: true, method: :delete, class: "text-decoration-none" do %>
+<% if protein.favorites.where(user_id: @current_user.id).present? %>
+    <%= link_to favorite_path(@current_user.id, protein_id: protein.id), remote: true, method: :delete, class: "text-decoration-none" do %>
         <i class="bi bi-heart-fill" style="color: red; font-size: 20px;"></i>
     <% end %>
-    <span style="font-size: 23px;"><%= @protein.favorites.count %></span>
+    <span style="font-size: 23px;"><%= protein.favorites.count %></span>
 <% else %>
-    <%= link_to favorites_path(protein_id: @protein.id), remote: true, method: :post, class: "text-decoration-none" do %>
+    <%= link_to favorites_path(protein_id: protein.id), remote: true, method: :post, class: "text-decoration-none" do %>
         <i class="bi bi-heart" style="color: black; font-size: 20px;"></i>
     <% end %>
-    <span style="font-size: 23px;"><%= @protein.favorites.count %></span>
+    <span style="font-size: 23px;"><%= protein.favorites.count %></span>
 <% end %>

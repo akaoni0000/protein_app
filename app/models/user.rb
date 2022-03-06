@@ -35,5 +35,4 @@ class User < ApplicationRecord
         return Relation.find_by(follow_id: user_id, followed_id: self.id).present?
     end
 
-
 end

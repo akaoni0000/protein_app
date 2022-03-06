@@ -1,2 +1,2 @@
-var goodBox = document.getElementById("goodBox");
-goodBox.innerHTML = '<%= j(render 'templetes/good') %>'
+var goodBox = document.getElementById("goodBox<%=@protein.id%>");
+goodBox.innerHTML = '<%= j(render 'templetes/good', protein: @protein) %>'

@@ -62,8 +62,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="goodBox mt-3" id="goodBox">
-                    <%= render "templetes/good" %>
+                <div class="goodBox mt-3" id="goodBox<%=@protein.id%>">
+                    <%= render "templetes/good", protein: @protein %>
                 </div>
                 <div>
                     <p class="border-bottom border-secondary mt-3"></p>

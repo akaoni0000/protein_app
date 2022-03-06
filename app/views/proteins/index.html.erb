@@ -1,4 +1,115 @@
-<div class="container">
-    <h3>プロテイン一覧</h3>
-    <%= render "templetes/protein_index" %>
+<div class="row" style="margin: 0">
+    <div class="bg-dark col-lg-3" style="height: 1000px; padding: 0;">
+        <nav class="navbar navbar-expand-lg navbar-light bg-danger w-100">
+            <div class="container-fluid">
+                <button class="navbar-toggler" style="margin: 0 0 0 auto;"type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span>絞り込み</span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <%= form_with(local: true, url: proteins_search_path, method: :post) do |f| %>
+                        <div class="navbar-nav" style="flex-direction: column;">
+                            <div class="nav-link" href="#">
+                                <p>◆味</p>
+                                <ul style="list-style: none;">
+                                    <li>
+                                        <input name="taste[]" class="form-check-input" type="radio" value="ココア">
+                                        <label>ココア</label>
+                                    </li>
+                                    <li>
+                                        <input name="taste[]" class="form-check-input" type="radio" value="チョコ">
+                                        <label>チョコ</label>
+                                    </li>
+                                    <li>
+                                        <input name="taste[]" class="form-check-input" type="radio" value="抹茶">
+                                        <label>抹茶</label>
+                                    </li>
+                                    <li>
+                                        <input name="taste[]" class="form-check-input" type="radio" value="ヨーグルト">
+                                        <label>ヨーグルト</label>
+                                    </li>
+                                    <li>
+                                        <input name="taste[]" class="form-check-input" type="radio" value="バニラ">
+                                        <label>バニラ</label>
+                                    </li>
+                                    <li>
+                                        <input name="taste[]" class="form-check-input" type="radio" value="ピーチ">
+                                        <label>ピーチ</label>
+                                    </li>
+                                    <li>
+                                        <input name="taste[]" class="form-check-input" type="radio" value="カフェオレ">
+                                        <label>カフェオレ</label>
+                                    </li>
+                                    <li>
+                                        <input name="taste[]" class="form-check-input" type="radio" value="その他">
+                                        <label>その他</label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="nav-link" href="#">
+                                <p>◆値段</p>
+                                <label for="customRange1" class="form-label"><span id="output0">100</span>円以上</label>
+                                <input name="price[]" type="range" min="100" max="29000" step="100" value="100" class="form-range" id="inputElem0">
+                                <label for="customRange2" class="form-label"><span id="output1">30000</span>円以下</label>
+                                <input name="price[]" type="range" min="200" max="30000" step="100" value="10000" class="form-range" id="inputElem1">
+                            </div>
+                            <div class="nav-link" href="#">
+                                <p>◆内容量</p>
+                                <label for="customRange3" class="form-label"><span id="output2">100</span>g以上</label>
+                                <input name="large_height"type="range" min="100" max="30000" step="100" value="2000" class="form-range" id="inputElem2">
+                            </div>
+                            <div class="nav-link" href="#">
+                                <p>◆タンパク質含有率</p>
+                                <label for="customRange4" class="form-label"><span id="output3">50</span>%以上</label>
+                                <input name="protein_ratio[]" type="range" min="0" max="100" step="1" value="50" class="form-range" id="inputElem3">
+                                <label for="customRange5" class="form-label"><span id="output4">100</span>%以下</label>
+                                <input name="protein_ratio[]" type="range" min="0" max="100" step="1" value="100" class="form-range" id="inputElem4">
+                            </div>
+                            <div class="nav-link" href="#">
+                                <%= f.submit "検索", class: "btn btn-success w-100" %>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+
+    <div class="bg-success col-lg-9" style="height: 1300px; padding: 50px;">
+        <%= render "templetes/protein_index" %>
+    </div>
 </div>
+
+
+<script>
+    window.onload = () => {
+        const inputElem0 = document.getElementById('inputElem0'); // input要素
+        inputElem0.addEventListener('input', function(){
+            var output0 = document.getElementById("output0");
+            output0.innerHTML = inputElem0.value;
+        }); 
+        const inputElem1 = document.getElementById('inputElem1'); // input要素
+        inputElem1.addEventListener('input', function(){
+            var output1 = document.getElementById("output1");
+            output1.innerHTML = inputElem1.value
+        }); 
+        const inputElem2 = document.getElementById('inputElem2'); // input要素
+        inputElem2.addEventListener('input', function(){
+            var output2 = document.getElementById("output2");
+            output2.innerHTML = inputElem2.value;
+        }); 
+        const inputElem3 = document.getElementById('inputElem3'); // input要素
+        inputElem3.addEventListener('input', function(){
+            var output3 = document.getElementById("output3");
+            output3.innerHTML = inputElem3.value;
+        }); 
+        const inputElem4 = document.getElementById('inputElem4'); // input要素
+        inputElem4.addEventListener('input', function(){
+            var output4 = document.getElementById("output4");
+            output4.innerHTML = inputElem4.value
+        }); 
+    }
+</script>
+
+
+

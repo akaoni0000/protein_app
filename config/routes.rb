@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   # proteinsコントローラ
   resources :proteins
   post "/proteins/image_destroy" => "proteins#image_destroy"
+  post "/proteins/search" => "proteins#search"
 
   # commentsコントローラー
   resources :comments, only: [:create, :destroy]

@@ -12,10 +12,10 @@ class Protein < ApplicationRecord
     # バリデーション
     validates :name, presence: true
     validates :feature, length: { minimum: 10 }
-    validates :price, presence: true
+    validates :price, presence: true, numericality: { greater_than_or_equal_to: 100, less_than_or_equal_to: 30000 }
     validates :height, presence: true
     validates :protein_height, presence: true
-    validates :large_height, presence: true
+    validates :large_height, presence: true, numericality: { greater_than_or_equal_to: 100, less_than_or_equal_to: 30000 }
     validates :taste, presence: true
     # カスタムバリデーション
     validate :correct_height
@@ -28,4 +28,6 @@ class Protein < ApplicationRecord
         end
     end
 
+
+    
 end

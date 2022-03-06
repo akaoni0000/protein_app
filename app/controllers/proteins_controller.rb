@@ -1,7 +1,5 @@
 class ProteinsController < ApplicationController
 
-    include AjaxHelper
-
     def new
         @protein = Protein.new
     end
@@ -9,6 +7,9 @@ class ProteinsController < ApplicationController
     def create
         @protein = Protein.new(protein_params)
         @protein.user_id = @current_user.id
+        if @protein.protein_height.present? && @protein.height.present?
+            @protein.ratio = @protein.protein_height * 100 / @protein.height
+        end
         if @protein.save
             flash[:notice] = "新しいプロテインを投稿しました"
             redirect_to user_path(@current_user.id)
@@ -29,6 +30,14 @@ class ProteinsController < ApplicationController
         if @protein.user_id != @current_user.id
             redirect_to user_path(@current_user.id)
         end 
+
+        #配列調整
+        @protein_image_array = []
+        for num in 0..@protein.protein_images.length-1
+            @protein_image_array.push(0)
+        end
+        session[:protein_image_array] = @protein_image_array
+        #配列調整ここまで
     end
 
     def update
@@ -42,6 +51,9 @@ class ProteinsController < ApplicationController
         @protein.price = @new_protein.price
         @protein.height = @new_protein.height
         @protein.protein_height = @new_protein.protein_height
+        if @protein.protein_height.present? && @protein.height.present?
+            @protein.ratio = @new_protein.protein_height * 100 / @new_protein.height
+        end
         @protein.taste = @new_protein.taste
 
         if @protein.save
@@ -55,9 +67,17 @@ class ProteinsController < ApplicationController
 
     def index
         @proteins = Protein.all
+        if params[:special].present?
+            protein_id = @current_user.favorites.pluck(:protein_id)
+            @proteins = Protein.find(protein_id)
+        end
     end
 
     def destroy
+        @protein = Protein.find(params[:id])
+        @protein.destroy
+        flash[:notice] = "プロテイン情報を削除しました"
+        redirect_to user_path(@current_user.id)
     end
 
     def image_destroy
@@ -65,9 +85,42 @@ class ProteinsController < ApplicationController
         if @current_user.id != @protein.user_id
             redirect_to root_path
         end
-        @protein.protein_images.delete_at(params[:arry_num].to_i)
+
+        #配列調整
+        if params[:arry_num].to_i == 0 
+            @del_arry_num = params[:arry_num].to_i
+        else
+            @del_arry_num = session[:protein_image_array].slice(0..params[:arry_num].to_i-1).count(0)
+        end
+        session[:protein_image_array][params[:arry_num].to_i] = 1
+        #配列調整ここまで
+
+        @protein.protein_images.delete_at(@del_arry_num)
         @protein.save
-        @form_id = params[:arry_num].to_i + 1
+        @form_id = params[:arry_num].to_i
+    end
+
+    def search
+        @proteins = []
+    
+        #味で検索
+        taste = params[:taste]
+        @proteinsTaste = Protein.where(taste: taste)
+
+        #値段で検索
+        price = params[:price]
+        @proteinsPrice = Protein.where(price: price[0].to_i..price[1].to_i)
+
+        #内容量で検索
+        large_height = params[:large_height]
+        @proteinsLargeHeight = Protein.where(large_height: large_height.to_i..Float::INFINITY)
+        
+        #タンパク質含有量で検索
+        ratio = params[:protein_ratio]
+        @proteinsRatio = Protein.where(ratio: ratio[0].to_i..ratio[1].to_i)
+
+        @proteins.push(@proteinsTaste & @proteinsPrice & @proteinsLargeHeight & @proteinsRatio).flatten!.uniq!
+        render "index"
     end
 
     def set_error_messages

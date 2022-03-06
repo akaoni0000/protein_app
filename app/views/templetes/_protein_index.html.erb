@@ -1,40 +1,44 @@
-<% @proteins.each do |protein| %>
-    <%= link_to protein_path(protein.id), class: "text-decoration-none" do %>
-        <div class="card inline m-2" style="width: 250px; height: 490px; color: black;">
-            <% if protein.protein_images[0].present? %>
-                <%= image_tag protein.protein_images[0].url, class: "card-img-top", size: "300x300" %>
-            <% else %>
-                <%= image_tag "no_image2.jpg", class: "card-img-top", size: "300x300" %>
-            <% end %>
-            <div class="card-body">
-                <h5 class="card-title" style="font-size: 17px; font-weight: bold; text-align: left;">
-                    <%= protein.name %>
-                </h5>
-                <% if protein.feature.length >40 %>
-                    <p class="card-text" style="height: 50px; text-align: left; color: grey;"><%= protein.feature.slice(0, 40) %>...</p>
+<% if @proteins.present? %>
+    <% @proteins.each do |protein| %>
+        <%= link_to protein_path(protein.id), class: "text-decoration-none" do %>
+            <div class="card inline m-2" style="width: 250px; height: 400px; color: black;">
+                <% if protein.protein_images[0].present? %>
+                    <%= image_tag protein.protein_images[0].url, class: "card-img-top", size: "200x200" %>
                 <% else %>
-                    <p class="card-text" style="height: 50px; text-align: left; color: grey;"><%= protein.feature %></p>
+                    <%= image_tag "no_image2.jpg", class: "card-img-top", size: "200x200" %>
                 <% end %>
+                <div class="card-body">
+                    <h5 class="card-title" style="font-size: 17px; font-weight: bold; text-align: left;">
+                        <%= protein.name %>
+                    </h5>
+                    <% if protein.feature.length >40 %>
+                        <p class="card-text" style="height: 50px; text-align: left; color: grey;"><%= protein.feature.slice(0, 40) %>...</p>
+                    <% else %>
+                        <p class="card-text" style="height: 50px; text-align: left; color: grey;"><%= protein.feature %></p>
+                    <% end %>
+                </div>
+                <div class="" style="text-align: left; padding-left: 5px;">
+                    <% if protein.user.avatar_image.present? %>
+                        <%= image_tag protein.user.avatar_image.url, class:"img-fluid circle", alt: "画像が表示できません", style: "width: 40px; height: 40px;" %>
+                    <% else %>
+                        <%= image_tag "no_image.jpg", class: "card-img-top", style: "width: 40px; height: 40px;" %>
+                    <% end %>
+                    <span><%=protein.user.name%></span>
+                </div>
+                <div style="text-align: left; padding-left: 5px;">
+                    <ul style="display: flex; list-style: none; padding: 0px;">
+                        <li id="goodBox<%=protein.id%>" style="margin-right: 10px;">
+                            <%= render "templetes/good", protein: protein%>
+                        </li>
+                        <li class="">
+                            <i class="bi bi-chat-left-text" style="font-size: 20px;"></i>
+                            <span style="font-size: 23px;"><%=protein.comments.count%></span>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="" style="text-align: left; padding-left: 5px;">
-                <% if protein.user.avatar_image.present? %>
-                    <%= image_tag protein.user.avatar_image.url, class:"img-fluid circle", alt: "画像が表示できません", style: "width: 40px; height: 40px;" %>
-                <% else %>
-                    <%= image_tag "no_image.jpg", class: "card-img-top", style: "width: 40px; height: 40px;" %>
-                <% end %>
-                <span><%=protein.user.name%></span>
-            </div>
-            <div style="text-align: left; padding-left: 5px;">
-                <ul style="display: flex; list-style: none; padding: 0px;">
-                    <li id="goodBox<%=protein.id%>" style="margin-right: 10px;">
-                        <%= render "templetes/good", protein: protein%>
-                    </li>
-                    <li class="">
-                        <i class="bi bi-chat-left-text" style="font-size: 20px;"></i>
-                        <span style="font-size: 23px;"><%=protein.comments.count%></span>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        <% end %>
     <% end %>
+<% else %>
+    <p id="notSubmit" style="font-size: 20px;">まだ投稿はありません</p>
 <% end %>

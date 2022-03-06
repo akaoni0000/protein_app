@@ -117,7 +117,8 @@
             <p style="font-size: 20px;">タンパク質含有率: <%= (@protein.protein_height/@protein.height.to_f).round(2) * 100 %>%</p>
             <p class="border-bottom border-secondary"></p>
             <% if @current_user.id == @protein.user_id %>
-                <%= link_to "編集する", edit_protein_path(@protein.id), class: "btn btn-info w-100" %>
+                <%= link_to "編集する", edit_protein_path(@protein.id), class: "btn btn-info w-100 mb-3" %>
+                <%= link_to "削除する", protein_path(@protein.id), method: :delete, class: "btn btn-danger w-100", data: { confirm: "本当に削除してもよろしいですか？" } %>
             <% end %>
         </div>
 

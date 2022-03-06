@@ -1,5 +1,5 @@
-<div class="border-bottom border-secondary">
-    <div class="container" style="margin-top: 150px;">
+<div class="border-bottom border-secondary mt-3">
+    <div class="container">
         <div class="row">
     
             <!-- col-lg-3 -->
@@ -9,7 +9,7 @@
                         <% if @user.avatar_image.present? %>
                             <%= image_tag @user.avatar_image.url, class:"img-fluid circle", alt: "画像が表示できません", style: "width: 250px; height: 250px;" %>
                         <% else %>
-                            <%= image_tag "no_image.jpg", class:"", alt: "画像が表示できません", style: "width: 250px; height: 250px;"  %>
+                            <%= image_tag "no_image.jpg", class:"", alt: "画像が表示できません", style: "width: 250px; height: 200px;"  %>
                         <% end %>
                     </div>
                     <ul class="dropdown-menu" style="">
@@ -48,16 +48,13 @@
     </div>
 </div>
 
-<div class="bg-light">
+<div class="bg-light" id="target">
     <p class="text-center">投稿一覧</p>
-    <div class="bg-secondar text-center container py-4">
+    <div class="bg-secondar text-center container">
         <%= render "templetes/protein_index" %>
     </div>
 </div>
 
-<div type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-  Launch static backdrop modal
-</div>
 
 <!-- Modal フォローフォロワー一覧表示 -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -91,3 +88,4 @@
 
 
 <%= javascript_pack_tag 'userImg.js', 'data-turbolinks-track': 'reload' %>
+<%= javascript_pack_tag "adjustHeight.js", 'data-turbolinks-track': 'reload' %>

@@ -10,11 +10,11 @@
                 <p style="font-size: 13px;">クリックして画像をアップロード</p>
             </div>
         </div>
-        <input accept="image/*" type="file" name="protein[protein_images][]" class="getImages inputImage display_none" id="1">  <!-- ここは本来は<%= f.file_field :avatars %>とかきたかったがこれをするとmultiplate: trueがないとはじからパラメータで弾かれる 今回はmultiplateはなしにしたいのでこのような形になった -->
+        <input accept="image/*" type="file" name="protein[protein_images][]" class="getImages inputImage display_none" id="0">  <!-- ここは本来は<%= f.file_field :avatars %>とかきたかったがこれをするとmultiplate: trueがないとはじからパラメータで弾かれる 今回はmultiplateはなしにしたいのでこのような形になった -->
+        <input accept="image/*" type="file" name="protein[protein_images][]" class="getImages inputImage display_none" id="1">
         <input accept="image/*" type="file" name="protein[protein_images][]" class="getImages inputImage display_none" id="2">
         <input accept="image/*" type="file" name="protein[protein_images][]" class="getImages inputImage display_none" id="3">
         <input accept="image/*" type="file" name="protein[protein_images][]" class="getImages inputImage display_none" id="4">
-        <input accept="image/*" type="file" name="protein[protein_images][]" class="getImages inputImage display_none" id="5">
 
         <div class="my-5">
             <h4>◆プロテイン名<span class="label-danger">必須</span></h4>

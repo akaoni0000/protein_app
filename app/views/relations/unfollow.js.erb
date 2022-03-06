@@ -8,12 +8,12 @@ var userInfo = document.getElementById("userInfo");
 <% end %>
 
 if (document.getElementById("follower<%=@user_id%>") != null) { //フォロワー画面にいるかどうか
-    var td = document.getElementById("follow<%=@user_id%>")
+    var td = document.getElementById("follower<%=@user_id%>")
     td.innerHTML = '<%= link_to "フォローする", relations_follow_path(@user_id, page_user_id: @user.id), class: "btn btn-info", remote: true, method: :post %>';
 }
 
 if (document.getElementById("follow<%=@user_id%>") != null) { //フォロー画面にいるかどうか
-    var td = document.getElementById("follower<%=@user_id%>")
+    var td = document.getElementById("follow<%=@user_id%>")
     td.innerHTML = '<%= link_to "フォローする", relations_follow_path(@user_id, page_user_id: @user.id), class: "btn btn-info", remote: true, method: :post %>';
 } else {
     <% if @current_user == @user %>

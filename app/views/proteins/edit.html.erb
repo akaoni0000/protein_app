@@ -6,9 +6,9 @@
             <P>最大5枚までアップロードできます</P>
             <div class="text-center" id="imageBox">
                 <% for num in 0..@protein.protein_images.length-1 do %>
-                    <div class="card inline my-3" id="card<%=num+1%>" style="width: 11rem;">
+                    <div class="card inline my-3" id="card<%=num%>" style="width: 11rem;">
                         <%= image_tag @protein.protein_images[num].url, class: "card-img-top", style:"height: 150px;" %>
-                        <div class="card-body">
+                        <div class="card-body existLinks">
                             <%= link_to "削除", proteins_image_destroy_path(arry_num: num, protein_id: @protein.id), method: :post, class: "card-text btn btn-danger", remote: true, data: { confirm: "本当に削除してよろしいですか？" } %>
                         </div>
                     </div>
@@ -20,7 +20,7 @@
             </div>
         </div>
 
-        <% for num in @protein.protein_images.length+1..5 do %>
+        <% for num in @protein.protein_images.length..4 do %>
             <input accept="image/*" type="file" name="protein[protein_images][]" class="getImages inputImage display_none" id=<%=num%>>  <!-- ここは本来は<%= f.file_field :avatars %>とかきたかったがこれをするとmultiplate: trueがないとはじからパラメータで弾かれる 今回はmultiplateはなしにしたいのでこのような形になった -->
         <% end %>
         

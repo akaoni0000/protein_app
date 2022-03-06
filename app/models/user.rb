@@ -13,6 +13,7 @@ class User < ApplicationRecord
     has_many :follow_user, through: :follow, source: :passive # 自分がフォローしている人
     has_many :follower_user, through: :follower, source: :active # 自分をフォローしている人
     has_many :comments, dependent: :destroy
+    has_many :favorites, dependent: :destroy
 
     # バリデーション
     validates :name, uniqueness: true, length: { in: 1..10 }

@@ -1,5 +1,6 @@
 class HomesController < ApplicationController
     def top
+        @proteins = Protein.first(6)
     end
 
     def user_login

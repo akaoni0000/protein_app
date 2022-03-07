@@ -44,14 +44,14 @@
         <div class="my-5">
             <h4>◆内容量<span class="label-danger">必須</span></h4>
             <div>
-                <%= f.number_field :large_height, class: "form-control number-field large_height_form" %>g
+                <%= f.number_field :large_weight, class: "form-control number-field large_weight_form" %>g
             </div>
         </div>
 
         <div class="my-5">
             <h4>◆タンパク質含有量<span class="label-danger">必須</span></h4>
             <div>
-                <%= f.number_field :height, class: "form-control number-field height_form", placeholder: "1食分の量" %>g<span class="mx-5">当たり</span><%= f.number_field :protein_height, class: "form-control number-field protein_height_form", placeholder: "タンパク質の量" %>g
+                <%= f.number_field :weight, class: "form-control number-field weight_form", placeholder: "1食分の量" %>g<span class="mx-5">当たり</span><%= f.number_field :protein_weight, class: "form-control number-field protein_weight_form", placeholder: "タンパク質の量" %>g
                 <p class='invalid-feedback'>${message}</p>
             </div>
         </div>

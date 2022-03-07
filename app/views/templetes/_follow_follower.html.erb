@@ -4,14 +4,14 @@
             <tr>
                 <th scope="row" style="text-align: left;">
                     <% if user.avatar_image.present? %>
-                        <%= image_tag user.avatar_image.url, alt: "画像が表示できません", size: "50x50" %>
+                        <%= image_tag user.avatar_image.url, class: "circle", alt: "画像が表示できません", size: "50x50" %>
                     <% else %>
                         <%= image_tag "no_image.jpg", alt: "画像が表示できません", size: "50x50" %>
                     <% end %>
                 </th>
                 <td style="text-align: left;">
                     <%= user.name %>
-                    <% if follow_or_follower != true && @current_user.followed?(user.id) %>
+                    <% if follow_or_follower != true && @current_user.present? && @current_user.followed?(user.id) %>
                         <span style="color: cadetblue; font-size: 10px;">フォローされています</span>
                     <% end %>
                 </td>
@@ -20,17 +20,17 @@
                 </td>
                 <% if follow_or_follower %> <!-- trueだったらフォロワー画面  idの値を分岐する-->
                     <td id="follower<%=user.id%>" style="width: 150px;">
-                        <% if @current_user.follow?(user.id) %>
+                        <% if @current_user.present? && @current_user.follow?(user.id) %>
                             <%= link_to "フォロー中", relations_unfollow_path(user.id, page_user_id: @user.id), class: "btn btn-primary", remote: true, method: :post %>                       
-                        <% else %>
+                        <% elsif @current_user.present? %>
                             <%= link_to "フォローする", relations_follow_path(user.id, page_user_id: @user.id), class: "btn btn-info", remote: true, method: :post %>
                         <% end %>
                     </td>
                 <% else %>    
                     <td id="follow<%=user.id%>">
-                        <% if @current_user.follow?(user.id) %>
+                        <% if @current_user.present? && @current_user.follow?(user.id) %>
                             <%= link_to "フォロー中", relations_unfollow_path(user.id, page_user_id: @user.id), class: "btn btn-primary", remote: true, method: :post %>
-                        <% else %>
+                        <% elsif @current_user.present? %>
                             <%= link_to "フォローする", relations_follow_path(user.id, page_user_id: @user.id), class: "btn btn-info", remote: true, method: :post %>
                         <% end %>
                     </td>

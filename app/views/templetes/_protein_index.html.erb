@@ -1,11 +1,11 @@
 <% if @proteins.present? %>
     <% @proteins.each do |protein| %>
         <%= link_to protein_path(protein.id), class: "text-decoration-none" do %>
-            <div class="card inline m-2" style="width: 250px; height: 400px; color: black;">
+            <div class="card inline m-2" style="width: 25%; height: 400px; color: black; min-width: 150px; max-width: 250px;">
                 <% if protein.protein_images[0].present? %>
-                    <%= image_tag protein.protein_images[0].url, class: "card-img-top", size: "200x200" %>
+                    <%= image_tag protein.protein_images[0].url, class: "card-img-top", style: "width: 100%; height: 200px;" %>
                 <% else %>
-                    <%= image_tag "no_image2.jpg", class: "card-img-top", size: "200x200" %>
+                    <%= image_tag "no_image2.jpg", class: "card-img-top", style: "width: 100%; height: 200px;" %>
                 <% end %>
                 <div class="card-body">
                     <h5 class="card-title" style="font-size: 17px; font-weight: bold; text-align: left;">
@@ -17,13 +17,15 @@
                         <p class="card-text" style="height: 50px; text-align: left; color: grey;"><%= protein.feature %></p>
                     <% end %>
                 </div>
-                <div class="" style="text-align: left; padding-left: 5px;">
-                    <% if protein.user.avatar_image.present? %>
-                        <%= image_tag protein.user.avatar_image.url, class:"img-fluid circle", alt: "画像が表示できません", style: "width: 40px; height: 40px;" %>
-                    <% else %>
-                        <%= image_tag "no_image.jpg", class: "card-img-top", style: "width: 40px; height: 40px;" %>
+                <div class="" style="text-align: left; padding-left: 5px; margin-top: 10px;">
+                    <%= link_to user_path(protein.user_id), style: "text-decoration: none;" do %>
+                        <% if protein.user.avatar_image.present? %>
+                            <%= image_tag protein.user.avatar_image.url, class:"img-fluid circle", alt: "画像が表示できません", style: "width: 40px; height: 40px;" %>
+                        <% else %>
+                            <%= image_tag "no_image.jpg", class: "card-img-top", style: "width: 40px; height: 40px;" %>
+                        <% end %>
+                        <span><%=protein.user.name%></span>
                     <% end %>
-                    <span><%=protein.user.name%></span>
                 </div>
                 <div style="text-align: left; padding-left: 5px;">
                     <ul style="display: flex; list-style: none; padding: 0px;">
@@ -42,3 +44,7 @@
 <% else %>
     <p id="notSubmit" style="font-size: 20px;">まだ投稿はありません</p>
 <% end %>
+
+<div class="my-5" style="display: flex; justify-content: center;">
+    <%= paginate @proteins, theme: 'bootstrap-5' %>
+</div>

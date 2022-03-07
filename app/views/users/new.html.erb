@@ -24,6 +24,9 @@
         <%= f.submit "登録", class: "w-100 btn btn-lg btn-primary my-4" %>
     <% end %>
 </div>
+<div class="p-5"style="text-align: right;">
+    <%= link_to "ログイン", login_path, style: "text-decoration: none;" %>
+</div>
 
 <% if @user.errors.messages.present? %>
     <%= javascript_pack_tag 'user_error.js', 'data-turbolinks-track': 'reload' %>

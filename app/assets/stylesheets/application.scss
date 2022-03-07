@@ -27,6 +27,32 @@
 
     body {
         padding-top: 86px;
+        height: 100%;
+    }
+
+    #top-img {
+        background-image: url(top_img.jpg);
+        background-size: cover;
+
+    }
+
+    #protein1 {
+        background-image: url(protein1.jpg);
+        background-size: cover;
+    }
+
+    #protein2 {
+        background-image: url(protein2.jpg);
+        background-size: cover;
+    }
+
+    #protein3 {
+        background-image: url(protein3.jpg);
+        background-size: cover;
+    }
+
+    .lead {
+        font-size: 17px;
     }
 
 
@@ -76,6 +102,7 @@
     .form {
         margin: 0 auto;
         width: 60%;
+        margin-top: 100px;
     }
 
     .alert {
@@ -136,4 +163,5 @@
     .goodBox {
         text-align: right;
     }
+
 

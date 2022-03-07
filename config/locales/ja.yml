@@ -13,7 +13,14 @@ ja:
         name: プロテイン名
         feature: 特徴
         price: 値段
-        height: 1食分の重さ
-        protein_height: タンパク質の重さ
-        large_height: 内容量
+        weight: 1食分の重さ
+        protein_weight: タンパク質の重さ
+        large_weight: 内容量
         taste: 味
+  views:
+    pagination:
+      first: "最初"
+      last: "最後"
+      previous: "前"
+      next: "次"
+      truncate: "..."

@@ -7,8 +7,8 @@ class ProteinsController < ApplicationController
     def create
         @protein = Protein.new(protein_params)
         @protein.user_id = @current_user.id
-        if @protein.protein_height.present? && @protein.height.present?
-            @protein.ratio = @protein.protein_height * 100 / @protein.height
+        if @protein.protein_weight.present? && @protein.weight.present?
+            @protein.ratio = @protein.protein_weight * 100 / @protein.weight
         end
         if @protein.save
             flash[:notice] = "新しいプロテインを投稿しました"
@@ -49,10 +49,10 @@ class ProteinsController < ApplicationController
         @protein.name = @new_protein.name
         @protein.feature = @new_protein.feature
         @protein.price = @new_protein.price
-        @protein.height = @new_protein.height
-        @protein.protein_height = @new_protein.protein_height
-        if @protein.protein_height.present? && @protein.height.present?
-            @protein.ratio = @new_protein.protein_height * 100 / @new_protein.height
+        @protein.weight = @new_protein.weight
+        @protein.protein_weight = @new_protein.protein_weight
+        if @protein.protein_weight.present? && @protein.weight.present?
+            @protein.ratio = @new_protein.protein_weight * 100 / @new_protein.weight
         end
         @protein.taste = @new_protein.taste
 
@@ -66,10 +66,10 @@ class ProteinsController < ApplicationController
     end
 
     def index
-        @proteins = Protein.all
-        if params[:special].present?
+        @proteins = Protein.all.page(params[:page]).per(8)
+        if params[:special].present? #お気に入りのプロテイン
             protein_id = @current_user.favorites.pluck(:protein_id)
-            @proteins = Protein.find(protein_id)
+            @proteins = Protein.where(id: protein_id).page(params[:page]).per(8)
         end
     end
 
@@ -112,14 +112,14 @@ class ProteinsController < ApplicationController
         @proteinsPrice = Protein.where(price: price[0].to_i..price[1].to_i)
 
         #内容量で検索
-        large_height = params[:large_height]
-        @proteinsLargeHeight = Protein.where(large_height: large_height.to_i..Float::INFINITY)
+        large_weight = params[:large_weight]
+        @proteinsLargeWeight = Protein.where(large_weight: large_weight.to_i..Float::INFINITY)
         
         #タンパク質含有量で検索
         ratio = params[:protein_ratio]
         @proteinsRatio = Protein.where(ratio: ratio[0].to_i..ratio[1].to_i)
 
-        @proteins.push(@proteinsTaste & @proteinsPrice & @proteinsLargeHeight & @proteinsRatio).flatten!.uniq!
+        @proteins.push(@proteinsTaste & @proteinsPrice & @proteinsLargeWeight & @proteinsRatio).flatten!.uniq!
         render "index"
     end
 
@@ -127,13 +127,13 @@ class ProteinsController < ApplicationController
         gon.name_error_messages = @protein.errors.full_messages_for(:name)
         gon.feature_error_messages = @protein.errors.full_messages_for(:feature)
         gon.price_error_messages = @protein.errors.full_messages_for(:price)
-        gon.height_error_messages = @protein.errors.full_messages_for(:height)
-        gon.protein_height_error_messages = @protein.errors.full_messages_for(:protein_height)
-        gon.large_height_error_messages = @protein.errors.full_messages_for(:large_height)
+        gon.weight_error_messages = @protein.errors.full_messages_for(:weight)
+        gon.protein_weight_error_messages = @protein.errors.full_messages_for(:protein_weight)
+        gon.large_weight_error_messages = @protein.errors.full_messages_for(:large_weight)
         gon.taste_error_messages = @protein.errors.full_messages_for(:taste)
     end
     
     def protein_params
-        params.require(:protein).permit(:name, :feature, :price, :taste, :protein_height, :height, :large_height, protein_images:[])
+        params.require(:protein).permit(:name, :feature, :price, :taste, :protein_weight, :weight, :large_weight, protein_images:[])
     end
 end

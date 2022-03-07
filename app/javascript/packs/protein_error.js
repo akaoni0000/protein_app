@@ -19,20 +19,20 @@ inputs.forEach((input)=>{
             input.insertAdjacentHTML('afterend', html);
         });
     }
-    else if(input.classList.contains("height_form")) {
-        gon.height_error_messages.forEach((message)=>{
+    else if(input.classList.contains("weight_form")) {
+        gon.weight_error_messages.forEach((message)=>{
             let html = `<p class='invalid-feedback'>${message}</p>`
             input.insertAdjacentHTML('afterend', html);
         });
     }
-    else if(input.classList.contains("protein_height_form")) {
-        gon.protein_height_error_messages.forEach((message)=>{
+    else if(input.classList.contains("protein_weight_form")) {
+        gon.protein_weight_error_messages.forEach((message)=>{
             let html = `<p class='invalid-feedback'>${message}</p>`
             input.insertAdjacentHTML('afterend', html);
         });
     }
-    else if(input.classList.contains("large_height_form")) {
-        gon.large_height_error_messages.forEach((message)=>{
+    else if(input.classList.contains("large_weight_form")) {
+        gon.large_weight_error_messages.forEach((message)=>{
             let html = `<p class='invalid-feedback'>${message}</p>`
             input.insertAdjacentHTML('afterend', html);
         });

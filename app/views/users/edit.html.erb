@@ -1,4 +1,4 @@
-<div class="form">
+<div class="form mt-5">
     <%= form_with(model: @user, local: true) do |f| %>
         <h1 class="h3 mb-3 fw-normal text-center">ユーザー編集</h1>
 
@@ -10,6 +10,11 @@
         <div class="mb-3">
             <label for="exampleFormControlInput2" class="form-label">メールアドレス</label>
             <%= f.email_field :email, class: "form-control email_form", id: "exampleFormControlInput2" %>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput3" class="form-label">自己紹介</label>
+            <%= f.text_area :introduction, class: "form-control introduction_form", id: "exampleFormControlInput3", style: "height: 130px;" %>
         </div>
 
         <%= f.submit "登録", class: "w-100 btn btn-lg btn-danger my-4" %>

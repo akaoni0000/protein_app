@@ -11,20 +11,21 @@ class Protein < ApplicationRecord
 
     # バリデーション
     validates :name, presence: true
-    validates :feature, length: { minimum: 10 }
+    validates :feature, length: { minimum: 5 }
     validates :price, presence: true, numericality: { greater_than_or_equal_to: 100, less_than_or_equal_to: 30000 }
-    validates :height, presence: true
-    validates :protein_height, presence: true
-    validates :large_height, presence: true, numericality: { greater_than_or_equal_to: 100, less_than_or_equal_to: 30000 }
+    validates :weight, presence: true
+    validates :protein_weight, presence: true
+    validates :large_weight, presence: true, numericality: { greater_than_or_equal_to: 100, less_than_or_equal_to: 30000 }
     validates :taste, presence: true
+
     # カスタムバリデーション
-    validate :correct_height
-    def correct_height
-        if height.present? && protein_height.present? && height <= protein_height
-            errors.add(:height, "はタンパク質の重さより大きくなくてはいけません")
+    validate :correct_weight
+    def correct_weight
+        if weight.present? && protein_weight.present? && weight <= protein_weight
+            errors.add(:weight, "はタンパク質の重さより大きくなくてはいけません")
         end
-        if large_height.present? && height.present? && large_height <= height
-            errors.add(:large_height, "は1食分の重さより大きくなくてはいけません")
+        if large_weight.present? && weight.present? && large_weight <= weight
+            errors.add(:large_weight, "は1食分の重さより大きくなくてはいけません")
         end
     end
 

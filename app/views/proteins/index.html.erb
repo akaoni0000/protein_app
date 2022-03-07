@@ -1,6 +1,7 @@
-<div class="row" style="margin: 0">
-    <div class="bg-dark col-lg-3" style="height: 1000px; padding: 0;">
-        <nav class="navbar navbar-expand-lg navbar-light bg-danger w-100">
+<div class="row" style="margin: 0; height: 100%;">
+
+    <div class="col-lg-3" style="padding: 0; background-color: #EEEEEE;">
+        <nav class="navbar navbar-expand-lg navbar-light w-100" style="background-color: #EEEEEE;">
             <div class="container-fluid">
                 <button class="navbar-toggler" style="margin: 0 0 0 auto;"type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span>絞り込み</span>
@@ -12,36 +13,52 @@
                                 <p>◆味</p>
                                 <ul style="list-style: none;">
                                     <li>
-                                        <input name="taste[]" class="form-check-input" type="radio" value="ココア">
-                                        <label>ココア</label>
+                                        <span class="checkbox pointer">
+                                            <input name="taste[]" class="form-check-input pointer" type="radio" value="ココア">
+                                            <label class="pointer">ココア</label>
+                                        </span>
                                     </li>
                                     <li>
-                                        <input name="taste[]" class="form-check-input" type="radio" value="チョコ">
-                                        <label>チョコ</label>
+                                        <span class="checkbox pointer">
+                                            <input name="taste[]" class="form-check-input pointer" type="radio" value="チョコ">
+                                            <label class="pointer">チョコ</label>
+                                        </span>
                                     </li>
                                     <li>
-                                        <input name="taste[]" class="form-check-input" type="radio" value="抹茶">
-                                        <label>抹茶</label>
+                                        <span class="checkbox pointer">
+                                            <input name="taste[]" class="form-check-input pointer" type="radio" value="抹茶">
+                                            <label class="pointer">抹茶</label>
+                                        </span>
                                     </li>
                                     <li>
-                                        <input name="taste[]" class="form-check-input" type="radio" value="ヨーグルト">
-                                        <label>ヨーグルト</label>
+                                        <span class="checkbox pointer">
+                                            <input name="taste[]" class="form-check-input pointer" type="radio" value="ヨーグルト">
+                                            <label class="pointer">ヨーグルト</label>
+                                        </span>
                                     </li>
                                     <li>
-                                        <input name="taste[]" class="form-check-input" type="radio" value="バニラ">
-                                        <label>バニラ</label>
+                                        <span class="checkbox pointer">
+                                            <input name="taste[]" class="form-check-input pointer" type="radio" value="バニラ">
+                                            <label class="pointer">バニラ</label>
+                                        </span>
                                     </li>
                                     <li>
-                                        <input name="taste[]" class="form-check-input" type="radio" value="ピーチ">
-                                        <label>ピーチ</label>
+                                        <span class="checkbox pointer">
+                                            <input name="taste[]" class="form-check-input pointer" type="radio" value="ピーチ">
+                                            <label class="pointer">ピーチ</label>
+                                        </span>
                                     </li>
                                     <li>
-                                        <input name="taste[]" class="form-check-input" type="radio" value="カフェオレ">
-                                        <label>カフェオレ</label>
+                                        <span class="checkbox pointer">
+                                            <input name="taste[]" class="form-check-input pointer" type="radio" value="カフェオレ">
+                                            <label class="pointer">カフェオレ</label>
+                                        </span>
                                     </li>
                                     <li>
-                                        <input name="taste[]" class="form-check-input" type="radio" value="その他">
-                                        <label>その他</label>
+                                        <span class="checkbox pointer">
+                                            <input name="taste[]" class="form-check-input pointer" type="radio" value="その他">
+                                            <label class="pointer">その他</label>
+                                        </span>
                                     </li>
                                 </ul>
                             </div>
@@ -55,7 +72,7 @@
                             <div class="nav-link" href="#">
                                 <p>◆内容量</p>
                                 <label for="customRange3" class="form-label"><span id="output2">100</span>g以上</label>
-                                <input name="large_height"type="range" min="100" max="30000" step="100" value="2000" class="form-range" id="inputElem2">
+                                <input name="large_weight"type="range" min="100" max="30000" step="100" value="2000" class="form-range" id="inputElem2">
                             </div>
                             <div class="nav-link" href="#">
                                 <p>◆タンパク質含有率</p>
@@ -75,41 +92,16 @@
     </div>
 
 
-    <div class="bg-success col-lg-9" style="height: 1300px; padding: 50px;">
-        <%= render "templetes/protein_index" %>
+    <div class="col-lg-9 pt-5 text-center">
+        <div>
+            <%= render "templetes/protein_index" %>
+        </div>
     </div>
+
 </div>
 
+<%= javascript_pack_tag 'range_form.js', 'data-turbolinks-track': 'reload' %>
 
-<script>
-    window.onload = () => {
-        const inputElem0 = document.getElementById('inputElem0'); // input要素
-        inputElem0.addEventListener('input', function(){
-            var output0 = document.getElementById("output0");
-            output0.innerHTML = inputElem0.value;
-        }); 
-        const inputElem1 = document.getElementById('inputElem1'); // input要素
-        inputElem1.addEventListener('input', function(){
-            var output1 = document.getElementById("output1");
-            output1.innerHTML = inputElem1.value
-        }); 
-        const inputElem2 = document.getElementById('inputElem2'); // input要素
-        inputElem2.addEventListener('input', function(){
-            var output2 = document.getElementById("output2");
-            output2.innerHTML = inputElem2.value;
-        }); 
-        const inputElem3 = document.getElementById('inputElem3'); // input要素
-        inputElem3.addEventListener('input', function(){
-            var output3 = document.getElementById("output3");
-            output3.innerHTML = inputElem3.value;
-        }); 
-        const inputElem4 = document.getElementById('inputElem4'); // input要素
-        inputElem4.addEventListener('input', function(){
-            var output4 = document.getElementById("output4");
-            output4.innerHTML = inputElem4.value
-        }); 
-    }
-</script>
 
 
 

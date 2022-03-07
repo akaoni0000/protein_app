@@ -5,7 +5,7 @@ class UsersController < ApplicationController
         if @user && @user.authenticate(params[:password])
             flash[:notice] = "ログインに成功しました"
             session[:user_id] = @user.id
-            redirect_to root_path
+            redirect_to user_path(@user.id)
         else
             flash[:notice] = "メールアドレスまたはパスワードが違います"
             redirect_to login_path
@@ -40,7 +40,7 @@ class UsersController < ApplicationController
         @user = User.find(params[:id])
         @follow_users = @user.follow_user
         @follower_users = @user.follower_user
-        @proteins = @current_user.proteins
+        @proteins = @user.proteins.page(params[:page]).per(4)
     end
 
     def edit
@@ -86,6 +86,6 @@ class UsersController < ApplicationController
 
     private
     def user_params
-        params.require(:user).permit(:name, :email, :avatar_image, :password, :password_confirmation)
+        params.require(:user).permit(:name, :email, :avatar_image, :introduction, :password, :password_confirmation)
     end
 end

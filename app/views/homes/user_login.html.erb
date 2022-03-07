@@ -1,4 +1,4 @@
-<div class="form-signin form">
+<div class="form-signin form text-center w-75">
     <%= form_with(url: users_login_path, method: :post, local: true) do |f| %>
         <h1 class="h3 mb-3 fw-normal text-center">ログイン画面</h1>
         
@@ -12,4 +12,7 @@
         </div>
         <%= f.submit "ログイン", class: "w-100 btn btn-lg btn-primary my-4" %>
     <% end %>
+</div>
+<div class="p-5"style="text-align: right;">
+    <%= link_to "新規登録", new_user_path, style: "text-decoration: none;" %>
 </div>

@@ -10,6 +10,7 @@
                 <div class="card-body">
                     <h5 class="card-title" style="font-size: 17px; font-weight: bold; text-align: left;">
                         <%= protein.name %>
+                        <span style="font-size: 12px; color: #E9967A; float: right;"><%= protein.taste %></span>
                     </h5>
                     <% if protein.feature.length >40 %>
                         <p class="card-text" style="height: 50px; text-align: left; color: grey;"><%= protein.feature.slice(0, 40) %>...</p>
@@ -22,7 +23,7 @@
                         <% if protein.user.avatar_image.present? %>
                             <%= image_tag protein.user.avatar_image.url, class:"img-fluid circle", alt: "画像が表示できません", style: "width: 40px; height: 40px;" %>
                         <% else %>
-                            <%= image_tag "no_image.jpg", class: "card-img-top", style: "width: 40px; height: 40px;" %>
+                            <%= image_tag "no_image.jpg", class: "card-img-top", style: "width: 40px; height: 30px;" %>
                         <% end %>
                         <span><%=protein.user.name%></span>
                     <% end %>

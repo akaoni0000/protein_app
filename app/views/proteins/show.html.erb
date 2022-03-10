@@ -62,15 +62,29 @@
                         </div>
                     </div>
                 </div>
-                <div class="goodBox mt-3" id="goodBox<%=@protein.id%>">
-                    <%= render "templetes/good", protein: @protein %>
+                <div class="mt-3">
+                    <span>
+                        <% if @protein.user.avatar_image.present? %>
+                            <%= image_tag @protein.user.avatar_image.url, class:"img-fluid circle inline", alt: "画像が表示できません", style: "width: 50px; height: 50px;" %>
+                        <% else %>
+                            <%= image_tag "no_image.jpg", class:"img-fluid circle inline", alt: "画像が表示できません", size: "50x50" %>
+                        <% end %>
+                        <%= @protein.user.name %>
+                    </span>
+                    <span class="goodBox" id="goodBox<%=@protein.id%>" style="float: right;">
+                        <%= render "templetes/good", protein: @protein %>
+                    </span>
+                </div>
+                <div class="mt-3">
+                    <p class="m-0" style="font-size: 14px; color: grey;">投稿日:<%= @protein.created_at.to_s(:datetime_jp) %></p>
+                    <p class="m-0" style="font-size: 14px; color: grey;">更新日:<%= @protein.updated_at.to_s(:datetime_jp) %></p>
                 </div>
                 <div>
                     <p class="border-bottom border-secondary mt-3"></p>
                     <p class="mt-3" style="font-size: 20px;">特徴</p>
                     <p style="padding-left: 20px; word-wrap: break-word;"><%=@protein.feature%></p>
                     <p class="border-bottom border-secondary"></p>
-                    <p class="mt-3" style="font-size: 20px;"><%=@protein.comments.length%>件のコメント</p>
+                    <p class="mt-3" style="font-size: 20px;" id="commentCount"><%=@protein.comments.length%>件のコメント</p>
                     <% if @current_user.present? %>
                         <div class="text-center mb-5">
                             <%= form_with(model: @comment, local: false) do |f| %>
@@ -86,21 +100,7 @@
                         </div>
                     <% end %>
                     <div id="commentBox">
-                        <% @comments.reverse_each do |comment| %>
-                            <div class="mt-4 text-center">
-                                <div class="inline" style="height: 30px; width:50px;">
-                                    <% if comment.user.avatar_image.present? %>
-                                        <%= image_tag comment.user.avatar_image.url, class:"img-fluid circle inline", alt: "画像が表示できません", style: "width: 50px; height: 50px;" %>
-                                    <% else %>
-                                        <%= image_tag "no_image.jpg", class:"img-fluid circle inline", alt: "画像が表示できません", size: "50x50" %>
-                                    <% end %>
-                                </div>
-                                <div class="inline" style="width: 80%; text-align: left;">
-                                    <p class="bold"><%=comment.user.name%></p>
-                                    <p><%= comment.comment %></p>
-                                </div>
-                            </div>
-                        <% end %>
+                        <%= render "templetes/comments", comments: @comments %>
                     </div>
                 </div>
             </div>

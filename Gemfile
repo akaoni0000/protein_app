@@ -78,3 +78,6 @@ gem 'gon'
 # ページネーション
 gem 'kaminari'
 gem 'bootstrap5-kaminari-views', '~> 0.0.1'
+
+# where orderメソッドを連続して使うため
+gem 'order_as_specified'

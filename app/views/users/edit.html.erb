@@ -1,4 +1,4 @@
-<div class="form mt-5">
+<div class="form mt-5" style="max-width: 400px;">
     <%= form_with(model: @user, local: true) do |f| %>
         <h1 class="h3 mb-3 fw-normal text-center">ユーザー編集</h1>
 
@@ -19,7 +19,10 @@
 
         <%= f.submit "登録", class: "w-100 btn btn-lg btn-danger my-4" %>
     <% end %>
+    <%= link_to "ログアウト", users_logout_path, method: :post, class: "btn btn-info w-100 mt-5" %>
+
 </div>
+
 
 <% if @user.errors.messages.present? %>
     <%= javascript_pack_tag 'user_error.js', 'data-turbolinks-track': 'reload' %>

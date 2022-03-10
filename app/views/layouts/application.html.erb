@@ -28,26 +28,33 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                    <% if @current_user.present? %>
-                        <li class="nav-item">
-                            <%= link_to "みんなのプロテイン", proteins_path, class: "nav-link" %>
-                        </li>
-                        <li class="nav-item">
-                            <%= link_to "お気に入り", proteins_path(special: true), class: "nav-link" %>
-                        </li>
-                        <li class="nav-item">
-                            <%= link_to "マイページ", user_path(@current_user.id), class: "nav-link" %>
-                        </li>
-                        <li class="nav-item">
-                            <%= link_to "投稿する", new_protein_path, class: "nav-link" %>
-                        </li>                           
-                    <% else %>
-                    <% end %>
+                        <% if @current_user.present? %>
+                            <li class="nav-item">
+                                <%= link_to proteins_path, class: "nav-link" do %>
+                                    <i class="bi bi-cup-straw" style="color: white;"></i>プロテイン
+                                <% end %>
+                            </li>
+                            <li class="nav-item">
+                                <%= link_to proteins_path(special: true), class: "nav-link" do %>
+                                    <i class="bi bi-heart" style="color: white"></i>お気に入り
+                                <% end %>
+                            </li>
+                            <li class="nav-item">
+                                <%= link_to user_path(@current_user.id), class: "nav-link" do %>
+                                    <i class="bi bi-tags-fill" style="color: white;"></i>マイページ
+                                <% end %>
+                            </li>
+                            <li class="nav-item">
+                                <%= link_to new_protein_path, class: "nav-link" do %>
+                                    <i class="bi bi-pencil-square" style="color: white;"></i>投稿する
+                                <% end %>
+                            </li>                           
+                        <% end %>
                     </ul>
-                    <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="検索" aria-label="Search">
-                    <button class="btn btn-success" type="submit" style="width: 75px;">検索</button>
-                    </form>
+                    <%= form_with(url: proteins_search_path, method: :get, local: true, class: "d-flex") do |f| %>
+                        <%= f.text_field :searchName, class: "form-control me-2", placeholder: "プロテイン名で検索" %>
+                        <%= f.submit "検索", class: "btn btn-success", style: "width: 75px;" %>
+                    <% end %>
                 </div>
                 </div>
             </nav>

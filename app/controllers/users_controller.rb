@@ -40,7 +40,7 @@ class UsersController < ApplicationController
         @user = User.find(params[:id])
         @follow_users = @user.follow_user
         @follower_users = @user.follower_user
-        @proteins = @user.proteins.page(params[:page]).per(4)
+        @proteins = @user.proteins.order(updated_at: "DESC").page(params[:page]).per(8)
     end
 
     def edit

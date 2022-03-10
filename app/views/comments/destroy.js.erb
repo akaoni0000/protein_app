@@ -2,7 +2,7 @@ var commentForm = document.getElementById("commentForm");
 commentForm.value = "";
 
 var commentBox = document.getElementById("commentBox");
-commentBox.innerHTML = '<%= j(render 'templetes/comments', comments: @comments) %>'
+commentBox.innerHTML = '<%= j(render 'templetes/comments', comments: @comments) %>' 
 
 var commentCount = document.getElementById("commentCount");
 commentCount.innerHTML = `<%=@comments.count%>件のコメント`

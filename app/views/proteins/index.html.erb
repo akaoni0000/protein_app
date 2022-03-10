@@ -1,4 +1,4 @@
-<div class="row" style="margin: 0; height: 100%;">
+<div class="row" style="margin: 0 auto;">
 
     <div class="col-lg-3" style="padding: 0; background-color: #EEEEEE;">
         <nav class="navbar navbar-expand-lg navbar-light w-100" style="background-color: #EEEEEE;">
@@ -7,79 +7,79 @@
                     <span>絞り込み</span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <%= form_with(local: true, url: proteins_search_path, method: :post) do |f| %>
+                    <%= form_with(local: true, url: proteins_search_path, method: :get) do |f| %>
                         <div class="navbar-nav" style="flex-direction: column;">
                             <div class="nav-link" href="#">
                                 <p>◆味</p>
                                 <ul style="list-style: none;">
                                     <li>
-                                        <span class="checkbox pointer">
-                                            <input name="taste[]" class="form-check-input pointer" type="radio" value="ココア">
-                                            <label class="pointer">ココア</label>
+                                        <span class="pointer">
+                                            <%= f.check_box :taste, {name: "taste[]", class: "pointer check_box"}, "ココア", 0 %>
+                                            <label class="pointer check">ココア</label>
                                         </span>
                                     </li>
                                     <li>
-                                        <span class="checkbox pointer">
-                                            <input name="taste[]" class="form-check-input pointer" type="radio" value="チョコ">
-                                            <label class="pointer">チョコ</label>
+                                        <span class="pointer">
+                                            <%= f.check_box :taste, {name: "taste[]", class: "pointer check_box"}, "チョコ", 0 %>
+                                            <label class="pointer check">チョコ</label>
                                         </span>
                                     </li>
                                     <li>
-                                        <span class="checkbox pointer">
-                                            <input name="taste[]" class="form-check-input pointer" type="radio" value="抹茶">
-                                            <label class="pointer">抹茶</label>
+                                        <span class="pointer">
+                                            <%= f.check_box :taste, {name: "taste[]", class: "pointer check_box"}, "抹茶", 0 %>
+                                            <label class="pointer check">抹茶</label>
                                         </span>
                                     </li>
                                     <li>
-                                        <span class="checkbox pointer">
-                                            <input name="taste[]" class="form-check-input pointer" type="radio" value="ヨーグルト">
-                                            <label class="pointer">ヨーグルト</label>
+                                        <span class="pointer">
+                                            <%= f.check_box :taste, {name: "taste[]", class: "pointer check_box"}, "ヨーグルト", 0 %>
+                                            <label class="pointer check">ヨーグルト</label>
                                         </span>
                                     </li>
                                     <li>
-                                        <span class="checkbox pointer">
-                                            <input name="taste[]" class="form-check-input pointer" type="radio" value="バニラ">
-                                            <label class="pointer">バニラ</label>
+                                        <span class="pointer">
+                                            <%= f.check_box :taste, {name: "taste[]", class: "pointer check_box"}, "バニラ", 0 %>
+                                            <label class="pointer check">バニラ</label>
                                         </span>
                                     </li>
                                     <li>
-                                        <span class="checkbox pointer">
-                                            <input name="taste[]" class="form-check-input pointer" type="radio" value="ピーチ">
-                                            <label class="pointer">ピーチ</label>
+                                        <span class="pointer">
+                                            <%= f.check_box :taste, {name: "taste[]", class: "pointer check_box"}, "ピーチ", 0 %>
+                                            <label class="pointer check">ピーチ</label>
                                         </span>
                                     </li>
                                     <li>
-                                        <span class="checkbox pointer">
-                                            <input name="taste[]" class="form-check-input pointer" type="radio" value="カフェオレ">
-                                            <label class="pointer">カフェオレ</label>
+                                        <span class="pointer">
+                                            <%= f.check_box :taste, {name: "taste[]", class: "pointer check_box"}, "カフェオレ", 0 %>
+                                            <label class="pointer check">カフェオレ</label>
                                         </span>
                                     </li>
                                     <li>
-                                        <span class="checkbox pointer">
-                                            <input name="taste[]" class="form-check-input pointer" type="radio" value="その他">
-                                            <label class="pointer">その他</label>
+                                        <span class="pointer">
+                                            <%= f.check_box :taste, {name: "taste[]", class: "pointer check_box"}, "その他", 0 %>
+                                            <label class="pointer check">その他</label>
                                         </span>
                                     </li>
                                 </ul>
                             </div>
                             <div class="nav-link" href="#">
                                 <p>◆値段</p>
-                                <label for="customRange1" class="form-label"><span id="output0">100</span>円以上</label>
-                                <input name="price[]" type="range" min="100" max="29000" step="100" value="100" class="form-range" id="inputElem0">
-                                <label for="customRange2" class="form-label"><span id="output1">30000</span>円以下</label>
-                                <input name="price[]" type="range" min="200" max="30000" step="100" value="10000" class="form-range" id="inputElem1">
+                                <label class="form-label"><span id="output0">100</span>円以上</label>
+                                <%= f.range_field :price, name: "price[]", min: "100", max: "29000", step: "100", value: "100", class: "form-range", id: "inputElem0" %>
+                                <label class="form-label"><span id="output1">30000</span>円以下</label>
+                                <%= f.range_field :price, name: "price[]", min: "200", max: "30000", step: "100", value: "30000", class: "form-range", id: "inputElem1" %>
                             </div>
                             <div class="nav-link" href="#">
                                 <p>◆内容量</p>
-                                <label for="customRange3" class="form-label"><span id="output2">100</span>g以上</label>
-                                <input name="large_weight"type="range" min="100" max="30000" step="100" value="2000" class="form-range" id="inputElem2">
+                                <label class="form-label"><span id="output2">100</span>g以上</label>
+                                <%= f.range_field :large_weight, min: "100", max: "30000", step: "100", value: "100", class: "form-range", id: "inputElem2" %>
                             </div>
                             <div class="nav-link" href="#">
                                 <p>◆タンパク質含有率</p>
-                                <label for="customRange4" class="form-label"><span id="output3">50</span>%以上</label>
-                                <input name="protein_ratio[]" type="range" min="0" max="100" step="1" value="50" class="form-range" id="inputElem3">
+                                <label class="form-label"><span id="output3">50</span>%以上</label>
+                                <%= f.range_field :protein_ratio, name: "protein_ratio[]", min: "0", max: "100", step: "1", value: "50", class: "form-range", id: "inputElem3" %>
                                 <label for="customRange5" class="form-label"><span id="output4">100</span>%以下</label>
-                                <input name="protein_ratio[]" type="range" min="0" max="100" step="1" value="100" class="form-range" id="inputElem4">
+                                <%= f.range_field :protein_ratio, name: "protein_ratio[]", min: "0", max: "100", step: "1", value: "100", class: "form-range", id: "inputElem4" %>
                             </div>
                             <div class="nav-link" href="#">
                                 <%= f.submit "検索", class: "btn btn-success w-100" %>
@@ -92,16 +92,22 @@
     </div>
 
 
-    <div class="col-lg-9 pt-5 text-center">
-        <div>
+    <div class="col-lg-9 text-center" style="padding: 0;">
+        <div class="w-100 text-center" style="background-color: #EEEEEE;">
+            <span>並び替え</span>
+            <span>
+                <%= form_with(url: proteins_sort_path, method: :get, class: "inline") do |f| %>
+                    <%= f.select :order, {"更新日順": "更新日順", "投稿日順": "投稿日順", "いいね順": "いいね順"} %>
+                    <%= f.hidden_field :proteins, :value=>@proteins %>
+                    <%= f.submit "", class: "display_none", id: "orderSubmit" %> 
+                <% end %>
+            </span>
+        </div>
+        <div class="mt-3">
             <%= render "templetes/protein_index" %>
         </div>
     </div>
 
 </div>
 
-<%= javascript_pack_tag 'range_form.js', 'data-turbolinks-track': 'reload' %>
-
-
-
-
+<%= javascript_pack_tag 'search_form.js', 'data-turbolinks-track': 'reload' %>

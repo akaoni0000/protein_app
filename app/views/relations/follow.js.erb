@@ -1,11 +1,9 @@
 var userInfo = document.getElementById("userInfo");
-<% if @current_user == @user %> // showページのユーザーがログインユーザーだったとき
-    userInfo.innerHTML = `
-        <span style="margin-right: 20px;">投稿<%=@current_user.proteins.count%>件</span>
-        <span class="pointer" style="margin-right: 20px;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">フォロワー<%=@current_user.follower.count%>人</span>
-        <span class="pointer" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">フォロー中<%=@current_user.follow.count%>人</span>
-    `;
-<% end %>
+userInfo.innerHTML = `
+    <span style="margin-right: 20px;">投稿<%=@user.proteins.count%>件</span>
+    <span class="pointer" style="margin-right: 20px;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">フォロワー<%=@user.follower.count%>人</span>
+    <span class="pointer" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">フォロー中<%=@user.follow.count%>人</span>
+`;
 
 if (document.getElementById("follower<%=@user_id%>") != null) { //フォロワー一覧画面にいるかどうか
     var td = document.getElementById("follower<%=@user_id%>")
@@ -20,6 +18,11 @@ if (document.getElementById("follow<%=@user_id%>") != null) { //フォロー一�
         var follow_user = document.getElementById("follow_user");
         follow_user.innerHTML = '<%= j(render "templetes/follow_follower", users: @current_user.follow_user, follow_or_follower: false) %> '
     <% end %>
+}
+
+if (<%=@page_follow%>) {
+    var page_follow_unfollow = document.getElementById("page_follow_unfollow");
+    page_follow_unfollow.innerHTML = `<%= link_to "フォロー中", relations_unfollow_path(@user_id, page_user_id: @user.id, page_follow: "true"), class: "btn btn-primary", id: "unfollow", remote: true, method: :post %>`
 }
 
 

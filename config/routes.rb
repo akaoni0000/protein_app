@@ -5,15 +5,16 @@ Rails.application.routes.draw do
   get "login" => "homes#user_login"
 
   # usersコントローラー
-  resources :users, except: [:destroy]
   post "/users/login" => "users#login"
   post "/users/logout" => "users#logout"
   post "/users/destroy_image" => "users#destroy_image"
+  resources :users, except: [:destroy]
 
   # proteinsコントローラ
-  resources :proteins
   post "/proteins/image_destroy" => "proteins#image_destroy"
-  post "/proteins/search" => "proteins#search"
+  get "/proteins/search" => "proteins#search"
+  get "/proteins/sort" => "proteins#sort"
+  resources :proteins
 
   # commentsコントローラー
   resources :comments, only: [:create, :destroy]

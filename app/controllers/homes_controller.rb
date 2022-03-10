@@ -1,6 +1,6 @@
 class HomesController < ApplicationController
     def top
-        @proteins = Protein.first(6)
+        @proteins = Protein.all.sort { |a,b| b.favorites.count <=> a.favorites.count }.first(8)
     end
 
     def user_login

@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
     before_action :set_login_user
-    before_action :redirect_root, except: [:top, :login, :user_login, :new, :create, :index, :show] 
+    before_action :redirect_root, except: [:top, :login, :user_login, :new, :create, :index, :show, :search, :sort] 
     
     def set_login_user
         @current_user = User.find_by(id: session[:user_id]) #find(session[])とすると必ずsessionに値がなければならない

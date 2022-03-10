@@ -1,0 +1,18 @@
+<% comments.reverse_each do |comment| %>
+    <div class="mt-4 text-center">
+        <div class="inline" style="height: 30px; width:50px;">
+            <% if comment.user.avatar_image.present? %>
+                <%= image_tag comment.user.avatar_image.url, class:"img-fluid circle inline", alt: "画像が表示できません", style: "width: 50px; height: 50px;" %>
+            <% else %>
+                <%= image_tag "no_image.jpg", class:"img-fluid circle inline", alt: "画像が表示できません", size: "50x50" %>
+            <% end %>
+        </div>
+        <div class="inline" style="width: 80%; text-align: left;">
+            <p class="bold"><%=comment.user.name%></p>
+            <p><%= comment.comment %></p>
+        </div>
+        <% if comment.user == @current_user %>
+            <%= link_to "削除", comment_path(comment.id), method: :delete, remote: true, class: "btn btn-danger mt-3", data: {confirm: "本当に削除してよろしいですか？"} %>
+        <% end %>
+    </div>
+<% end %>

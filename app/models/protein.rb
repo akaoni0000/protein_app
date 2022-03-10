@@ -1,5 +1,8 @@
 class Protein < ApplicationRecord
 
+    # gem 'order_as_specified'
+    extend OrderAsSpecified
+
     # carriewave
     mount_uploaders :protein_images, ImageUploader
     serialize :protein_images, JSON

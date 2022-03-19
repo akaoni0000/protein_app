@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   post "/users/login" => "users#login"
   post "/users/logout" => "users#logout"
   post "/users/destroy_image" => "users#destroy_image"
-  resources :users, except: [:destroy]
+  resources :users, except: [:destroy, :index]
 
   # proteinsコントローラ
   post "/proteins/image_destroy" => "proteins#image_destroy"

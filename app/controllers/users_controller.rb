@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
     def login
         @user = User.find_by(email: params[:email])
-        if @user && @user.authenticate(params[:password])
+        if @user.present? && @user.authenticate(params[:password])
             flash[:notice] = "ログインに成功しました"
             session[:user_id] = @user.id
             redirect_to user_path(@user.id)
@@ -29,7 +29,8 @@ class UsersController < ApplicationController
     def create
         @user = User.new(user_params)
         if @user.save
-            redirect_to root_path
+            flash[:notice] = "登録が完了しました"
+            redirect_to user_path(@user.id)
         else
             set_error_messages
             render "new"
@@ -44,16 +45,8 @@ class UsersController < ApplicationController
     end
 
     def edit
+        binding.pry
         @user = @current_user #こうしないとエラー画面でfiele_with_errorsが作成されなかった
-    end
-
-    def index
-        @follow_or_follower = params[:follow_or_follower]
-        if @follow_or_follower == "follow"
-            @users = @current_user.follow_user
-        else
-            @users = @current_user.follower_user
-        end
     end
 
     def update

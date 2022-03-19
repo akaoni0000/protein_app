@@ -50,6 +50,11 @@ test:
 #
 production:
   <<: *default
-  database: myapp_production
-  username: myapp
-  password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
+  adapter: postgresql
+  encoding: utf8
+  # database: <%= ENV["APP_DATABASE"] %>
+  # username: <%= ENV["APP_USER_NAME"] %>
+  # password: <%= ENV["APP_PASSWORD"] %>
+  # host: <%= ENV["APP_HOST"] %>
+  url: <%= ENV['DATABASE_URL'] %>
+

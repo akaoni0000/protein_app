@@ -51,6 +51,9 @@ group :development do
   gem 'spring'
 end
 
+gem 'rack-mini-profiler', '~> 2.0'
+
+
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 3.26'
@@ -90,3 +93,6 @@ gem 'bootstrap5-kaminari-views', '~> 0.0.1'
 
 # where orderメソッドを連続して使うため
 gem 'order_as_specified'
+
+# データベース
+gem 'pg', group: :production # heroku用

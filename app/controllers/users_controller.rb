@@ -45,7 +45,6 @@ class UsersController < ApplicationController
     end
 
     def edit
-        binding.pry
         @user = @current_user #こうしないとエラー画面でfiele_with_errorsが作成されなかった
     end
 
@@ -75,7 +74,7 @@ class UsersController < ApplicationController
     end
 
 
-    
+
 
     private
     def user_params

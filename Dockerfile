@@ -1,23 +1,14 @@
-FROM ruby:2.5.1
+FROM ruby:3.0.5
 
-# yarnをインストールするための準備
-RUN curl https://deb.nodesource.com/setup_12.x | bash
-RUN curl https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-
-# 必要なツールをインストール
-RUN apt-get update -qq && \
-    apt-get install -y build-essential nodejs yarn
+# yarnとnodejsをインストール
+RUN apt-get update -qq
+RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - \
+&& apt-get install -y nodejs
+RUN npm install --global yarn
 
 # ルート直下にwebappという名前で作業ディレクトリを作成（コンテナ内のアプリケーションディレクトリ）
 RUN mkdir /myapp 
 WORKDIR /myapp
-
-# nvmをインストールしてnodejsを安定版にする ~ではなくrootを使わないと失敗する
-RUN git clone git://github.com/creationix/nvm.git /root/.nvm && \  
-    echo . /root/.nvm/nvm.sh >> ~/.bashrc && \ 
-    . /root/.bashrc && \
-    nvm install --lts
 
 # ホストのGemfileとGemfile.lockをコンテナにコピー
 ADD Gemfile /myapp/Gemfile
@@ -31,10 +22,11 @@ ADD . /myapp
 
 # puma.sockを配置するディレクトリを作成
 RUN mkdir -p tmp/sockets
+RUN mkdir -p tmp/pids
 
 # herokuにupするときはコメントアウトを外す
-ENV RAILS_ENV=production
-COPY start.sh /start.sh
-RUN chmod 744 /start.sh
-CMD ["sh", "/start.sh"]
+# ENV RAILS_ENV=production
+# COPY start.sh /start.sh
+# RUN chmod 744 /start.sh
+# CMD ["sh", "/start.sh"]
 

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.5.1'
+ruby '3.0.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.4'
@@ -79,7 +79,7 @@ gem 'dotenv-rails'
 gem 'carrierwave', '~> 2.0'
 
 # パスワード暗号化
-gem 'bcrypt',  '3.1.12' 
+gem 'bcrypt',  '3.1.12'
 
 # エラー文日本語化
 gem 'rails-i18n'

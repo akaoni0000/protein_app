@@ -52,7 +52,7 @@
                         <% end %>
                     </ul>
                     <%= form_with(url: proteins_search_path, method: :get, local: true, class: "d-flex") do |f| %>
-                        <%= f.text_field :searchName, class: "form-control me-2", placeholder: "プロテイン名で検索" %>
+                        <%= f.text_field :searchName, class: "form-control me-2", placeholder: "プロテイン名で検索", required:"required" %>
                         <%= f.submit "検索", class: "btn btn-success", style: "width: 75px;" %>
                     <% end %>
                 </div>

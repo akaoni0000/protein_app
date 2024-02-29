@@ -21,6 +21,3 @@
     "build": "cross-env NODE_SERVER=\"localhost\" NODE_OPTIONS='--openssl-legacy-provider' nuxt build"
   }
 }
-
-
-

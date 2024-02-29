@@ -115,7 +115,10 @@ class ProteinsController < ApplicationController
         else 
             #味で検索
             taste = params[:taste]
-            taste.delete("0")
+            begin
+                taste.delete("0")
+            resucue
+            end
             if taste == []
                 @proteinsTaste = Protein.all
             else 

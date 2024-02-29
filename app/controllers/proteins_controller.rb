@@ -117,7 +117,7 @@ class ProteinsController < ApplicationController
             taste = params[:taste]
             begin
                 taste.delete("0")
-            resucue
+            rescue 
             end
             if taste == []
                 @proteinsTaste = Protein.all

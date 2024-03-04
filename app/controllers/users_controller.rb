@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+    protect_from_forgery
 
     def login
         @user = User.find_by(email: params[:email])

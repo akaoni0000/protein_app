@@ -11,3 +11,17 @@ config.application.rbにconfig.hosts << "ドメイン名"を追加
 
 ユーザー名は@の前の数字を変えるだけで色々なユーザーデータでログインできます
 
+
+
+### httpにする
+・docker-compsoe.ymlの以下を削除<br>
+- /etc/letsencrypt/live/protan.site/fullchain.pem:/ssl/server.crt<br>
+- /etc/letsencrypt/live/protan.site/privkey.pem:/ssl/server.key<br>
+
+ポートを
+port: 80:80にする
+
+・nginx.confの以下を削除<br>
+proxy_set_header X-Forwarded-Proto https;
+
+listen80にする

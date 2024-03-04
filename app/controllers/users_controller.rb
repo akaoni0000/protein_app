@@ -31,6 +31,7 @@ class UsersController < ApplicationController
         @user = User.new(user_params)
         if @user.save
             flash[:notice] = "登録が完了しました"
+            session[:user_id] = @user.id
             redirect_to user_path(@user.id)
         else
             set_error_messages

@@ -12,6 +12,7 @@
         </div>
         <%= f.submit "ログイン", class: "w-100 btn btn-lg btn-primary my-4" %>
     <% end %>
+    <%= link_to "簡単ログイン", users_login_path(email: "1@gmail.com", password: "aaaaaa"), method: :post, class: "w-100 btn btn-lg btn-success my-4" %>
 </div>
 <div class="p-5"style="text-align: right;">
     <%= link_to "新規登録", new_user_path, style: "text-decoration: none;" %>

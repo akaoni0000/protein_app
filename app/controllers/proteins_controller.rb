@@ -29,7 +29,7 @@ class ProteinsController < ApplicationController
         @protein = Protein.find(params[:id])
         if @protein.user_id != @current_user.id
             redirect_to user_path(@current_user.id)
-        end 
+        end
 
         #配列調整
         @protein_image_array = []
@@ -59,7 +59,7 @@ class ProteinsController < ApplicationController
         if @protein.save
             flash[:notice] = "プロテイン情報を更新しました"
             redirect_to protein_path(params[:id])
-        else 
+        else
             set_error_messages
             render "edit"
         end
@@ -96,7 +96,7 @@ class ProteinsController < ApplicationController
         end
 
         #配列調整
-        if params[:arry_num].to_i == 0 
+        if params[:arry_num].to_i == 0
             @del_arry_num = params[:arry_num].to_i
         else
             @del_arry_num = session[:protein_image_array].slice(0..params[:arry_num].to_i-1).count(0)
@@ -112,7 +112,7 @@ class ProteinsController < ApplicationController
         if params[:searchName].present? #header上の検索から検索した場合
             searchName = params[:searchName]
             @proteins = Protein.where(['name LIKE ?', "%#{searchName}%"])
-        else 
+        else
             #味で検索
             taste = params[:taste]
             begin
@@ -122,7 +122,7 @@ class ProteinsController < ApplicationController
             end
             if taste == []
                 @proteinsTaste = Protein.all
-            else 
+            else
                 @proteinsTaste = Protein.where(taste: taste)
             end
 
@@ -133,7 +133,7 @@ class ProteinsController < ApplicationController
             #内容量で検索
             large_weight = params[:large_weight]
             @proteinsLargeWeight = Protein.where(large_weight: large_weight.to_i..Float::INFINITY)
-            
+
             #タンパク質含有量で検索
             ratio = params[:protein_ratio]
             @proteinsRatio = Protein.where(ratio: ratio[0].to_i..ratio[1].to_i)
@@ -178,7 +178,7 @@ class ProteinsController < ApplicationController
             taste.delete("0")
             if taste == []
                 @proteinsTaste = @proteins.order_as_specified(id: @proteins_ids)
-            else 
+            else
                 @proteinsTaste = @proteins.where(taste: taste).order_as_specified(id: @proteins_ids)
             end
 
@@ -197,7 +197,7 @@ class ProteinsController < ApplicationController
             #共通
             @proteins = @proteinsTaste & @proteinsPrice & @proteinsLargeWeight & @proteinsRatio
 
-            #検索情報を保存
+            #検索情報を保存する
             gon.taste = session[:taste]
             gon.price = session[:price]
             gon.large_weight = session[:large_weight]
@@ -208,7 +208,7 @@ class ProteinsController < ApplicationController
         else
             @proteins = @proteins.order_as_specified(id: @proteins_ids)
         end
-        
+
         @proteins = Kaminari.paginate_array(@proteins).page(params[:page]).per(8)
         render "index"
     end
@@ -222,7 +222,7 @@ class ProteinsController < ApplicationController
         gon.large_weight_error_messages = @protein.errors.full_messages_for(:large_weight)
         gon.taste_error_messages = @protein.errors.full_messages_for(:taste)
     end
-    
+
     def protein_params
         params.require(:protein).permit(:name, :feature, :price, :taste, :protein_weight, :weight, :large_weight, protein_images:[])
     end

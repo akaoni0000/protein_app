@@ -197,7 +197,7 @@ class ProteinsController < ApplicationController
             #共通
             @proteins = @proteinsTaste & @proteinsPrice & @proteinsLargeWeight & @proteinsRatio
 
-            #検索情報を保存する
+            #検索情報を保存
             gon.taste = session[:taste]
             gon.price = session[:price]
             gon.large_weight = session[:large_weight]
